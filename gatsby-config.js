@@ -1,10 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Weronika Wójcik Interior Design`,
+    description: `Searching for a bathroom design? I\'m an interior designer eager to help you with all stylistic choces and materials`,
+    author: `Me, the developer <pawel.jakub.wojcik@gmail.com>`,
   },
   plugins: [
+    `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
