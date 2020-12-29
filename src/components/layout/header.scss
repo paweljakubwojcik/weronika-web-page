@@ -12,6 +12,7 @@
 
     &__title-container {
         position: relative;
+        flex-shrink: 0;
     }
 
     &__title {
@@ -41,12 +42,106 @@
     }
 }
 
+$break-point: 800px;
+
+.navbar {
+    &__ham-btn {
+        background-color: transparent;
+        position: relative;
+        z-index: 101;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0.3em;
+
+        width: 23px;
+        height: 20px;
+        span {
+            display: block;
+            background-color: var(--font-color);
+            width: 100%;
+            height: 4px;
+            border-radius: 10em;
+            transform-origin: left;
+            transition: transform 0.4s, opacity 0.4s;
+        }
+
+        &--close {
+            span {
+                &:nth-of-type(1) {
+                    transform-origin: left;
+                    transform: rotateZ(45deg);
+                }
+                &:nth-of-type(2) {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                &:nth-of-type(3) {
+                    transform-origin: left;
+                    transform: rotateZ(-45deg);
+                }
+            }
+        }
+
+        @media screen and (min-width: $break-point) {
+            display: none;
+        }
+    }
+}
+
 .links {
+    @media screen and (max-width: $break-point) {
+        display: none;
+    }
+
     display: flex;
     height: fit-content;
     align-items: center;
+    justify-content: space-evenly;
+    width: 500px;
 
     &__link-element {
-        margin: 0 3em;
+        margin: auto;
+    }
+}
+
+.sidebar {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--sidebar-color);
+
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.3s, transform 0.3s;
+
+    &--visible {
+        opacity: 1;
+        transform: translateX(0);
+
+        @media screen and (min-width: $break-point) {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+    }
+
+    &__links-list {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__link-element {
+        margin: 1em;
+        font-size: 2em;
     }
 }
