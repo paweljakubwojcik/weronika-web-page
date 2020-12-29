@@ -27,12 +27,12 @@
         animation: squeezing 5s infinite linear;
     }
 
-    transition: filter 0.3s, padding .3s;
+    transition: filter 0.3s, padding 0.3s;
 
     &:hover {
         filter: brightness(1.2);
         cursor: pointer;
-        padding: 0.2em 2em
+        padding: 0.2em 2em;
     }
 }
 

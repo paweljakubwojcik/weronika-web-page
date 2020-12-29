@@ -12,7 +12,7 @@ export default function HeroSection() {
                 <h2>Let's create something
                     <div className="hero-section__colored-text"> together</div>
                 </h2>
-                <Button className="hero-section__button">
+                <Button className="hero-section__button" to='/'>
                     Start now
                 </Button>
             </header>

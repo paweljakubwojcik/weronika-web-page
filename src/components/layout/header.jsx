@@ -10,7 +10,7 @@ const Header = () => {
     <header className='main-header'>
       <div className="main-header__title-container">
         <h1 className='main-header__title'>
-          <Link to="/"> Weronika Wójcik </Link>
+          Weronika Wójcik
         </h1>
         <div className="main-header__sub-title">
           <span>INTERIOR</span>

@@ -3,6 +3,7 @@ html {
   -webkit-text-size-adjust: 100%;
   box-sizing: border-box;
   overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -10,6 +11,7 @@ html {
   --background-color: #f1f1f1;
   --sidebar-color: #e7e7e79c;
   --main-color: #cc4e33;
+  --main-color-transparent: #cc4f33aa;
 }
 
 * {
@@ -28,6 +30,19 @@ body {
   word-wrap: break-word;
   font-kerning: normal;
   overflow-x: hidden;
+
+  font-size: 16px;
+  transition: font-size 0.2s;
+  @media (max-width: 800px) {
+    font-size: 12px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
 }
 
 a {

@@ -1,7 +1,8 @@
 .main-header {
-    position: absolute;
+    position: fixed;
     z-index: 3;
     width: 100%;
+    max-width: 1400px;
     top: 0;
     padding: 0.1em 2em;
     margin: 2em 0 0 0;

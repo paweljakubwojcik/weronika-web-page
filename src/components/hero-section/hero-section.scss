@@ -10,6 +10,10 @@
         width: 10em;
         font-size: 32px;
 
+        h2 {
+            margin: 1em 0;
+        }
+
         @media (max-width: 800px) {
             font-size: 22px;
             transform: translate(75%, -50%);
@@ -22,7 +26,7 @@
     }
 
     &__button {
-        margin: 0 0.5em;
+        margin: 0.5em;
     }
 }
 
