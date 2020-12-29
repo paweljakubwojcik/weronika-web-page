@@ -15,15 +15,9 @@ import "./layout.scss"
 const Layout = ({ children }) => {
 
   return (
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 1400,
-        padding: `0`,
-      }}
-    >
+    <div className='wrapper'>
       <Header />
-      <main style={{minHeight:'100vh'}}>{children}</main>
+      <main >{children}</main>
       <footer className='main-footer'>
         © {new Date().getFullYear()}, Built with {` `} <a href="https://www.gatsbyjs.com">Gatsby</a>
       </footer>

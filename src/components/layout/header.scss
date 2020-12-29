@@ -1,0 +1,52 @@
+.main-header {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    top: 0;
+    padding: 0.1em 2em;
+    margin: 2em 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: solid 1px var(--main-color);
+
+    &__title-container {
+        position: relative;
+    }
+
+    &__title {
+        margin: 0 auto;
+        padding: 0.1em 0;
+    }
+
+    &__sub-title {
+        display: flex;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        padding: 0.4em 0;
+
+        font-size: 0.8em;
+        font-weight: bold;
+        letter-spacing: 0.15em;
+        span {
+            display: block;
+            margin: 0;
+            padding: 0 0.2em;
+        }
+        :last-child {
+            background-color: var(--main-color);
+            color: var(--background-color);
+        }
+    }
+}
+
+.links {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+
+    &__link-element {
+        margin: 0 3em;
+    }
+}

@@ -1,45 +1,26 @@
+import './header.scss'
+
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import Navbar from "./Navbar"
 
-
-
-const links = [
-  {
-    name: 'Projects',
-    url: '/projects'
-  },
-  {
-    name: 'About',
-    url: '#about'
-  },
-  {
-    name: 'Contact',
-    url: '#contact'
-  },
-]
-
-
-const Header = () => (
-  <header className='main-header'>
-    <div className="main-header__title-container">
-      <h1 className='main-header__title'>
-        <Link to="/"> Weronika Wójcik </Link>
-      </h1>
-      <div className="main-header__sub-title">
-        <span>INTERIOR</span>
-        <span>DESIGN</span>
+const Header = () => {
+  return (
+    <header className='main-header'>
+      <div className="main-header__title-container">
+        <h1 className='main-header__title'>
+          <Link to="/"> Weronika Wójcik </Link>
+        </h1>
+        <div className="main-header__sub-title">
+          <span>INTERIOR</span>
+          <span>DESIGN</span>
+        </div>
       </div>
-    </div>
 
-    <ul className="links">
-      {links.map(link =>
-        <li className="links__link-element">
-          <Link to={link.url}>{link.name}</Link>
-        </li>
-      )}
-    </ul>
-  </header>
-)
+      <Navbar />
+    </header>
+  )
+}
 
 export default Header

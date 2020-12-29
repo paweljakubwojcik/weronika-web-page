@@ -1,0 +1,51 @@
+.hero-section {
+    position: relative;
+    overflow-x: visible;
+
+    &__header {
+        position: absolute;
+        top: 50%;
+        right: 28%;
+        transform: translate(50%, -50%);
+        width: 10em;
+        font-size: 32px;
+
+        @media (max-width: 800px) {
+            font-size: 22px;
+            transform: translate(75%, -50%);
+        }
+    }
+
+    &__colored-text {
+        color: var(--main-color);
+        display: inline;
+    }
+
+    &__button {
+        margin: 0 0.5em;
+    }
+}
+
+.hero-background {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 100vw;
+    min-width: 1000px;
+    max-height: 800px;
+    overflow: hidden;
+    z-index: -1;
+
+    &__gradient-effect {
+        display: block;
+        height: 10%;
+        width: 100%;
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        background: linear-gradient(#00000000, var(--background-color));
+    }
+}
