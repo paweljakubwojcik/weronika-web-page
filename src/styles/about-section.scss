@@ -1,7 +1,6 @@
 $breaking-point: 800px;
 
 .about-section {
-
     overflow-x: hidden;
     margin: 3em 0;
     align-items: flex-start;
@@ -64,13 +63,21 @@ $breaking-point: 800px;
 
     @media (max-width: $breaking-point) {
         width: 120%;
-         min-width: unset;
+        min-width: unset;
         left: 50%;
         transform: translate(-50%, 0);
     }
 
+    &:hover {
+        .hero-image__text {
+            filter: blur(0) opacity(1);
+        }
+    }
+
     &__text {
+        transition: filter 0.4s;
         position: absolute;
+        cursor: default;
         z-index: 1;
         background-color: var(--main-color);
         text-transform: uppercase;
@@ -79,7 +86,9 @@ $breaking-point: 800px;
         font-size: 40px;
         letter-spacing: 0.2em;
         width: 100%;
-        top: 20%;
+        top: 27%;
+        transform: translateY(-50%);
+        filter: blur(10px) opacity(0);
         padding: 0.2em 0;
         text-align: center;
         mix-blend-mode: hard-light;

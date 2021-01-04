@@ -7,19 +7,20 @@ import Navbar from "./Navbar"
 
 const Header = () => {
   return (
-    <header className='main-header'>
-      <div className="main-header__title-container">
-        <h1 className='main-header__title'>
-          Weronika Wójcik
+    <div className="container">
+      <header className='main-header'>
+        <div className="main-header__title-container">
+          <h1 className='main-header__title'>
+            Weronika Wójcik
         </h1>
-        <div className="main-header__sub-title">
-          <span>INTERIOR</span>
-          <span>DESIGN</span>
+          <div className="main-header__sub-title">
+            <span>INTERIOR</span>
+            <span>DESIGN</span>
+          </div>
         </div>
-      </div>
-
-      <Navbar />
-    </header>
+        <Navbar />
+      </header>
+    </div>
   )
 }
 

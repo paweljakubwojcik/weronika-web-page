@@ -1,15 +1,37 @@
-.main-header {
+.container {
     position: fixed;
     z-index: 3;
     width: 100%;
-    max-width: 1400px;
     top: 0;
-    padding: 0.1em 2em;
+    left: 0;
+    display: flex;
+    justify-content: center;
+
+    background-color: var(--sidebar-color);
     margin: 2em 0 0 0;
+    padding: 0 1em;
+}
+
+.main-header {
+    position: relative;
+    max-width: 1400px;
+    width: 100%;
+    padding: 0.1em 2em;
+
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    border-bottom: solid 1px var(--main-color);
+
+    &::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 1px;
+        top: 3.1em;
+        left: 0;
+        background-color: var(--main-color);
+    }
 
     &__title-container {
         position: relative;
@@ -23,7 +45,8 @@
 
     &__sub-title {
         display: flex;
-        position: absolute;
+        position: relative;
+        justify-content: end;
         right: 0;
         top: 100%;
         padding: 0.4em 0;
@@ -103,6 +126,16 @@ $break-point: 800px;
 
     &__link-element {
         margin: auto;
+        padding: 0.2em 0.5em;
+        position: relative;
+        transition: color 0.4s;
+
+        &:hover {
+            &::after {
+                transform: scale(1);
+                filter: blur(0) opacity(1);
+            }
+        }
     }
 }
 

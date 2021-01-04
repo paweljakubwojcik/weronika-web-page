@@ -27,7 +27,7 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
-    }, 
+    },
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
@@ -35,6 +35,21 @@ module.exports = {
           include: /svg/ // See below to configure properly
         }
       }
+    },
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: `https://cms-strapi-weronika-wojcik.herokuapp.com`,
+        queryLimit: 1000, // Default to 100
+        contentTypes: [`360-pics`, `folders`],
+        //If using single types place them in this array.
+        singleTypes: [`hero-image`, `hero-description`],
+        // Possibility to login with a strapi user, when content types are not publically available (optional).
+        loginData: {
+          identifier: "",
+          password: "",
+        },
+      },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
