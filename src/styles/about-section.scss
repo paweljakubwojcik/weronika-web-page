@@ -22,7 +22,7 @@ $breaking-point: 800px;
 
     &__header {
         font-size: 2em;
-        margin: 1em 0;
+        margin: 0 0;
         align-self: start;
         grid-area: head;
         @media (max-width: $breaking-point) {
@@ -59,7 +59,11 @@ $breaking-point: 800px;
     min-width: 500px;
     grid-area: image;
     position: relative;
-    clip-path: polygon(10% 0, 70% 0, 100% 100%, 40% 100%);
+    clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%);
+    overflow: hidden;
+    img {
+        mix-blend-mode: luminosity;
+    }
 
     @media (max-width: $breaking-point) {
         width: 120%;
@@ -78,19 +82,20 @@ $breaking-point: 800px;
         transition: filter 0.4s;
         position: absolute;
         cursor: default;
-        z-index: 1;
-        background-color: var(--main-color);
+        z-index: -1;
+        color: var(--main-color);
         text-transform: uppercase;
-        color: var(--background-color);
         font-weight: bold;
-        font-size: 40px;
-        letter-spacing: 0.2em;
-        width: 100%;
-        top: 27%;
-        transform: translateY(-50%);
-        filter: blur(10px) opacity(0);
-        padding: 0.2em 0;
+        font-size: 4.3em;
+        letter-spacing: 100em;
+        line-height: 1em;
+        width: 10%;
+        top:0;
+        left:30%;
+        transform: translateX(-50%);
+        /*  filter: blur(10px) opacity(0); */
+        
         text-align: center;
-        mix-blend-mode: hard-light;
+        mix-blend-mode: normal;
     }
 }
