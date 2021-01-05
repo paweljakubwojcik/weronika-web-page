@@ -1,0 +1,38 @@
+
+.container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 auto;
+    max-width: 1200px;
+
+    @media (max-width:700px){
+         grid-template-columns: 1fr;
+          max-width: 600px;
+    }
+
+}
+
+.column {
+    --margin: 1em;
+
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 var(--margin)/2;
+    & > * {
+        margin: var(--margin);
+        width: calc(50% - var(--margin) * 2);
+        box-shadow: 2px 10px 10px 2px #22222255;
+    }
+
+    &--left {
+        :nth-child(3n) {
+            width: 100%;
+        }
+    }
+    &--right {
+        :nth-child(3n + 1) {
+            width: 100%;
+        }
+    }
+}

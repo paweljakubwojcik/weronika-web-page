@@ -57,6 +57,7 @@ $breaking-point: 800px;
 .hero-image {
     width: 80%;
     min-width: 500px;
+   
     grid-area: image;
     position: relative;
     clip-path: polygon(0 0, 70% 0, 100% 100%, 30% 100%);
@@ -68,6 +69,7 @@ $breaking-point: 800px;
     @media (max-width: $breaking-point) {
         width: 120%;
         min-width: unset;
+        max-width: 500px;
         left: 50%;
         transform: translate(-50%, 0);
     }

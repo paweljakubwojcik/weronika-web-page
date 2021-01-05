@@ -6,7 +6,7 @@ import HeroImage from '../components/HeroImage'
 import Button from '../components/button/Button'
 import Akcent from '../components/color-accent'
 
-import ProjectsSection from '../components/projects-sections'
+import PreviewGrid from '../components/preview-grid'
 import SEO from "../components/seo"
 
 import '../styles/index.scss'
@@ -54,14 +54,18 @@ const IndexPage = () => (
       </div>
 
     </section>
-    <section className='projects-section'>
+
+    <section id='projects' className='projects-section'>
       <header className='projects-section__header'>
         <h2>
           Find
                 <Akcent> Inspiration</Akcent>
         </h2>
       </header>
-      
+
+      <PreviewGrid />
+
+      <Button className='projects-section__button' to='/projects'> More projects </Button>
     </section>
   </Layout>
 )
