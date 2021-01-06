@@ -1,7 +1,8 @@
 import React from 'react'
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, Link, graphql } from "gatsby"
 import Img from "gatsby-image"
 import styles from './preview-grid.module.scss'
+
 
 
 
@@ -9,7 +10,7 @@ export default function PreviewGrid() {
 
     const data = useStaticQuery(graphql`
         query MyQuery {
-            pics:allImageSharp {
+            pics:allImageSharp(limit:6) {
                 nodes {
                 ...Parts
                 }
@@ -26,9 +27,8 @@ export default function PreviewGrid() {
         }
     `)
 
-    const length = 6
-    const randomIndex = Math.floor(Math.random() * (data.pics.nodes.length - length))
-    const pics = data.pics.nodes.slice(randomIndex, randomIndex + length)
+
+    const pics = data.pics.nodes
 
     return (
         <div className={styles.container}>
@@ -46,7 +46,7 @@ export default function PreviewGrid() {
 const ImageLink = ({ to, fluid, ...rest }) => {
     return (
         <Link to={to} >
-            <Img fluid={fluid} style={{ height: '100%'}} {...rest} />
+            <Img fluid={fluid} style={{ height: '100%' }} {...rest} />
         </Link>
     )
 }

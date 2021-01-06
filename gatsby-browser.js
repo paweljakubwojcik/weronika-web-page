@@ -5,3 +5,15 @@
  */
 
 // You can delete this file if you're not using it
+
+import React from "react"
+
+import { GlobalState } from "./src/components/globalState.js"
+
+export const wrapRootElement = ({ element }) => {
+    return (
+        <GlobalState>
+            {element}
+        </GlobalState>
+    )
+}

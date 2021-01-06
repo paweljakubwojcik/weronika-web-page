@@ -31,6 +31,8 @@ export default function HeroImage() {
     return <div>Picture not found</div>
   }
 
+  console.log(data.placeholderImage.childImageSharp.fluid)
+
   return (
     <div className="hero-background" ref={setRef}>
       <Img style={{ transform: `translateY(${parallax}px)` }} fluid={data.placeholderImage.childImageSharp.fluid} />
