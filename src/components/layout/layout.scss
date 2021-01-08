@@ -1,8 +1,10 @@
-
-
 .wrapper {
   max-width: 1400px;
   position: relative;
   margin: 0 auto;
   padding: 0;
+
+  &.no-Color {
+    --main-color: var(--font-color);
+  }
 }

@@ -2,7 +2,6 @@ html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   box-sizing: border-box;
-  overflow-y: scroll;
   scroll-behavior: smooth;
 }
 
@@ -12,6 +11,9 @@ html {
   --sidebar-color: #e7e7e79c;
   --main-color: #cc4e33;
   --main-color-transparent: #cc4f33aa;
+  --shadow-color: #22222233;
+  --shadow: 2px 2px 10px -2px var(--shadow-color);
+  --focus-shadow: 2px 2px 10px 6px var(--shadow-color);
 }
 
 * {

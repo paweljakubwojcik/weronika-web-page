@@ -6,10 +6,10 @@ import PropTypes from "prop-types"
 import Header from "./header.jsx"
 import "./layout.scss"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, nonColor }) => {
 
   return (
-    <div className='wrapper'>
+    <div className={`wrapper ${nonColor ? "no-Color" : ""}`}>
       <Header />
       <main >{children}</main>
       <footer className='main-footer'>
