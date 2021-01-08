@@ -2,48 +2,26 @@ import React from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 
-const GridItem = props => {
+const GridItem = ({ item, js, index }) => {
 
     return (
         <>
-            <div className="img-container" key={props.index}>
+            {item && <div className="img-container" key={index}>
 
-                {props.item && props.js && (
-                    <Link to={`/viewItem?id=${props.item.l}`}>
-                        <Img className='image' fluid={props.item.fluid} alt="" title="" />
+                {js && (
+                    <Link to={`/project?id=${item.l}`}>
+                        <Img className='img-container__image' fluid={item.fluid} alt="" title="" />
+                        <div className="img-container__info">
+                            <span>{item.name}</span>
+                        </div>
                     </Link>
                 )}
-                {props.item && !props.js && (
-                    <a href={props.item.l} target="_blank" rel="noopener noreferrer">
-                        <img src={props.item.s} alt="" title="" />
+                {!js && (
+                    <a href={item.l} target="_blank" rel="noopener noreferrer">
+                        <img src={item.s} alt="" title="" />
                     </a>
                 )}
-
-            </div>
-            <style jsx>
-                {`
-                    .img-container {
-                        position: relative;
-                        width:100%;
-                        background:#EEE;
-                        overflow: hidden;
-                        z-index: 1;
-                    }
-                    .img-container .image {
-                        top: 0;
-                        display: block;
-                        position: absolute;
-                        height: 100%;
-                        margin: 0 !important;
-                        transition: 0.2s ease-in-out;
-                        z-index: 2;
-                    }
-                    .image-container .image:hover{
-                            opacity: 0.4;
-                            transform: scale(1.1);
-                    }
-                `}
-            </style>
+            </div>}
         </>
     )
 }

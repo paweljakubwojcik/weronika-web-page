@@ -33,7 +33,7 @@ export class InfiniteScroll extends React.Component {
 
     checkWindowScroll = () => {
 
-        //console.log("Window height " + window.innerHeight + " Sentinel boundingRectTop " + this.sentinel.getBoundingClientRect().top)
+        console.log("Window height " + window.innerHeight + " Sentinel boundingRectTop " + this.sentinel.getBoundingClientRect().top)
         if (
             this.props.hasMore &&
             this.sentinel.getBoundingClientRect().top - window.innerHeight <
@@ -44,7 +44,7 @@ export class InfiniteScroll extends React.Component {
     }
 
     render() {
-        const sentinel = <div ref={i => this.sentinel = i} />;
+        const sentinel = <div ref={i => this.sentinel = i} style={{ height: 1 }} />;
 
         if (this.props.render) {
             return this.props.render({

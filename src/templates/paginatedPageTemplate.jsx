@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/layout/layout.js"
 import SEO from "../components/seo.js"
 import { GlobalStateContext } from "../components/globalState.js"
-import View from "../components/projectsPage/view.jsx"
+import Projects from "../components/projectsPage/Projects.jsx"
 
 class PaginatedPageTemplate extends React.Component {
 
@@ -13,7 +13,7 @@ class PaginatedPageTemplate extends React.Component {
                     {globalState => (
                         <>
                             <SEO title="Projects" />
-                            <View globalState={globalState} pageContext={this.props.pageContext} />
+                            <Projects globalState={globalState} pageContext={this.props.pageContext} />
                         </>
                     )}
                 </GlobalStateContext.Consumer>
