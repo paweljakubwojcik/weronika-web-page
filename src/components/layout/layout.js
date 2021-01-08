@@ -21,6 +21,7 @@ const Layout = ({ children, nonColor }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  nonColor: PropTypes.bool
 }
 
 export default Layout

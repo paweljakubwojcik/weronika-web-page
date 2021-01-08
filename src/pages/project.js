@@ -6,7 +6,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 export default function Project() {
 
-    const data = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     query {
       placeholderImage: file(relativePath: { eq: "projekty/beige-6.jpg" }) {
         childImageSharp {
@@ -24,21 +24,21 @@ export default function Project() {
   `)
 
 
-    const fluid = data.placeholderImage?.childImageSharp.fluid
-    const width = fluid?.presentationWidth;
-    const height = fluid?.presentationHeight;
+  const fluid = data.placeholderImage?.childImageSharp.fluid
+  const width = fluid?.presentationWidth;
+  const height = fluid?.presentationHeight;
 
-    return (
-        <div style={{ overflow: 'hidden', width: '100vw', height: '100vh' }}>
-            <div className="blur-background" style={{ backgroundImage: `url(${data.placeholderImage?.childImageSharp.fixed.src})` }}>
-            </div>
-            <Layout nonColor={true}>
-                <SEO title={'beige-6'} />
-                <div className="project-container">
-                    <Img fluid={fluid} style={{ width, height, maxWidth: '100%', maxHeight: '100%' }} />
-                </div>
-            </Layout>
+  return (
+    <div style={{ overflow: 'hidden', width: '100vw', height: '100vh' }}>
+      <div className="blur-background" style={{ backgroundImage: `url(${data.placeholderImage?.childImageSharp.fixed.src})` }}>
+      </div>
+      <Layout nonColor={true}>
+        <SEO title={'beige-6'} />
+        <div className="project-container">
+          <Img fluid={fluid} style={{ width }} />
+        </div>
+      </Layout>
 
-        </div >
-    )
+    </div >
+  )
 }
