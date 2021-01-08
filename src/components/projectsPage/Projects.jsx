@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
-import { Link } from "gatsby"
-import Pagination from "./pagination.jsx"
+
 import { InfiniteScroll } from "./infiniteScroll.jsx"
 
 import Grid from "./grid.jsx"
+import BackgroundThing from '../background-thing/BackgroundThing'
 
 export default function Projects({ globalState, pageContext }) {
 
@@ -28,6 +28,9 @@ export default function Projects({ globalState, pageContext }) {
 
     return (
         <>
+
+            <BackgroundThing />
+
             <InfiniteScroll
                 throttle={150}
                 threshold={400}

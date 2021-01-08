@@ -10,6 +10,7 @@ import PreviewGrid from '../components/preview-grid'
 import SEO from "../components/seo"
 
 import '../styles/index.scss'
+import BackgroundThing from "../components/background-thing/BackgroundThing"
 
 const IndexPage = () => (
   <Layout>
@@ -62,6 +63,8 @@ const IndexPage = () => (
                 <Akcent> Inspiration</Akcent>
         </h2>
       </header>
+
+      <BackgroundThing style={{ position: 'absolute', top:0 }} />
 
       <PreviewGrid />
 
