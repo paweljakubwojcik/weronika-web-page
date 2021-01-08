@@ -64,6 +64,10 @@
             color: var(--background-color);
         }
     }
+
+    &__project-title {
+        font-weight: normal;
+    }
 }
 
 $break-point: 800px;

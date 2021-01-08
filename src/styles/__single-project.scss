@@ -6,7 +6,7 @@
 
     background-position: center;
     background-size: contain;
-    filter: blur(10px);
+    filter: blur(10px) brightness(.99) grayscale(.5);
 }
 
 .project-container {

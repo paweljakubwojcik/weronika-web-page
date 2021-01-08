@@ -6,11 +6,11 @@ import PropTypes from "prop-types"
 import Header from "./header.jsx"
 import "./layout.scss"
 
-const Layout = ({ children, nonColor }) => {
+const Layout = ({ children, nonColor, title }) => {
 
   return (
     <div className={`wrapper ${nonColor ? "no-Color" : ""}`}>
-      <Header />
+      <Header title={title} />
       <main >{children}</main>
       <footer className='main-footer'>
         © {new Date().getFullYear()}, Built with {` `} <a href="https://www.gatsbyjs.com">Gatsby</a>

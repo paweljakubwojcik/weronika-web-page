@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import Navbar from "./Navbar"
 
-const Header = () => {
+const Header = ({ title }) => {
   return (
     <div className="container">
       <header className='main-header'>
@@ -18,7 +18,8 @@ const Header = () => {
             <span>DESIGN</span>
           </div>
         </div>
-        <Navbar />
+        {title ? <h3 className="main-header__project-title" >{title}</h3> : <Navbar />}
+
       </header>
     </div>
   )
