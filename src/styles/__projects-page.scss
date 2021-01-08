@@ -25,7 +25,7 @@
     .img-container {
         position: relative;
         width: 100%;
-        box-shadow: 0 4px 10px 2px var(--shadow-color);
+        box-shadow: var(--shadow);
         overflow: hidden;
         z-index: 1;
         transition: filter 2s;

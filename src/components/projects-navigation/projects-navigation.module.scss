@@ -19,6 +19,7 @@
     font-size: 1.5em;
     width: 2em;
     height: 2em;
+    margin: .3em;
 
     display: flex;
     align-items: center;
@@ -41,8 +42,4 @@
     justify-content: center;
 
     margin-bottom: 4em;
-
-    :nth-child(n){
-        margin: .3em;
-    }
 }

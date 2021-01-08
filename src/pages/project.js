@@ -9,7 +9,7 @@ export default function Project() {
 
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "projekty/beige-6.jpg" }) {
+      placeholderImage: file(relativePath: { eq: "projekty/panorama.jpg" }) {
         name
         childImageSharp {
           fluid(maxWidth: 3200) {
@@ -30,18 +30,24 @@ export default function Project() {
   const width = fluid?.presentationWidth;
   const height = fluid?.presentationHeight;
   const name = data.placeholderImage?.name
+  const backgroundURL = data.placeholderImage?.childImageSharp.fixed.src.replace(/([()])/g, '\\' + '$&')
+  console.log(backgroundURL)
 
   return (
     <div style={{ overflow: 'hidden', width: '100vw', height: '100vh' }}>
-      <div className="blur-background" style={{ backgroundImage: `url(${data.placeholderImage?.childImageSharp.fixed.src})` }}>
-      </div>
+      <div className="blur-background" style={{ backgroundImage: `url(${backgroundURL})` }}></div>
+      
+
       <Layout nonColor={true} title={name}>
         <SEO title={name} />
         <div className="project-container">
           <Img fluid={fluid} style={{ width }} />
+
         </div>
         <Navigation />
       </Layout>
+
+      
 
     </div >
   )

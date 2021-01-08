@@ -1,5 +1,7 @@
 .wrapper {
+  display: flex;
   max-width: 1400px;
+  min-height: 100vh;
   position: relative;
   margin: 0 auto;
   padding: 0;
@@ -7,4 +9,8 @@
   &.no-Color {
     --main-color: var(--font-color);
   }
+}
+
+.main-footer {
+  margin-top: auto;
 }

@@ -5,11 +5,15 @@
     height: 100%;
 
     background-position: center;
-    background-size: contain;
-    filter: blur(10px) brightness(.99) grayscale(.5);
+    background-size: cover;
+    filter: blur(10px) brightness(0.99) grayscale(0.5);
 }
 
 .project-container {
+    position:fixed;
+    top:0;
+    left:50%;
+    transform: translateX(-50%);
     height: 100vh;
     width: 100%;
     overflow: hidden;
