@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 
 import {
     Scene,
@@ -24,32 +24,33 @@ const cameraInitialPosition = [-900, -200, -900]
 const controlsMaxDistance = 100000;
 const controlsMinDistance = 1000;
 
-const scene = new Scene();
-
-const camera = new PerspectiveCamera(fov, aspectRatio, near, far);
-camera.position.set(...cameraInitialPosition);
-const renderer = new WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-
-function render() {
-    requestAnimationFrame(() => renderer.render(scene, camera));
-}
-
-function resize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.updateProjectionMatrix();
-    render()
-}
-
 
 export default function PanoramicView({ data, setNavVisibility }) {
 
+    const scene = useMemo(() => new Scene(), [])
+    const camera = useMemo(() => new PerspectiveCamera(fov, aspectRatio, near, far), [fov, aspectRatio, near, far]);
+    const renderer = useMemo(() => new WebGLRenderer(), []);
+
+    camera.position.set(...cameraInitialPosition);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    function render() {
+        requestAnimationFrame(() => renderer.render(scene, camera));
+    }
+
+    function resize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.updateProjectionMatrix();
+        render()
+    }
+
     const [canvas, setCanvas] = useState(null)
+
+    const [visible, setVisible] = useState(false)
 
     useEffect(() => {
         window.addEventListener('resize', resize)
-
         return () => {
             window.removeEventListener('resize', resize)
         }
@@ -62,7 +63,7 @@ export default function PanoramicView({ data, setNavVisibility }) {
 
             let skySphereGeo = new SphereGeometry(100000, 100, 100);
             // texture loader is async, so it takes callback
-            let textureSphere = new TextureLoader().load(data, render);
+            let textureSphere = new TextureLoader().load(data, () => { render(); setVisible(true) });
             let skySphere = new Mesh(skySphereGeo, new MeshBasicMaterial({ map: textureSphere, side: BackSide }));
 
             const controls = new OrbitControls(camera, renderer.domElement);
@@ -74,14 +75,18 @@ export default function PanoramicView({ data, setNavVisibility }) {
 
             canvas.appendChild(renderer.domElement);
             scene.add(skySphere)
-
         }
     }, [canvas])
 
     return (
-        <div ref={setCanvas} style={{ position: 'fixed' }}
+        <div ref={setCanvas}
             onPointerDown={() => { setNavVisibility(false) }}
             onPointerUp={() => { setNavVisibility(true) }}
+            style={{
+                position: 'fixed',
+                opacity: visible ? '1' : '0',
+                transition: 'opacity .5s',
+            }}
         >
 
         </div>
