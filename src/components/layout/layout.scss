@@ -1,5 +1,4 @@
 .wrapper {
-  display: flex;
   max-width: 1400px;
   min-height: 100vh;
   position: relative;
@@ -12,5 +11,8 @@
 }
 
 .main-footer {
-  margin-top: auto;
+  
+  position: absolute;
+  bottom:0;
+  z-index: 101;
 }

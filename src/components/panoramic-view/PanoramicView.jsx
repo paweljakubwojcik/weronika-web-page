@@ -61,7 +61,8 @@ export default function PanoramicView({ data, setNavVisibility }) {
             console.log('creating panoramic view')
 
             let skySphereGeo = new SphereGeometry(100000, 100, 100);
-            let textureSphere = new TextureLoader().load(data);
+            // texture loader is async, so it takes callback
+            let textureSphere = new TextureLoader().load(data, render);
             let skySphere = new Mesh(skySphereGeo, new MeshBasicMaterial({ map: textureSphere, side: BackSide }));
 
             const controls = new OrbitControls(camera, renderer.domElement);
@@ -73,9 +74,6 @@ export default function PanoramicView({ data, setNavVisibility }) {
 
             canvas.appendChild(renderer.domElement);
             scene.add(skySphere)
-           
-            console.log(scene)
-            setTimeout(render, 100)
 
         }
     }, [canvas])
