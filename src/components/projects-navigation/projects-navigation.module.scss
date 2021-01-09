@@ -26,8 +26,8 @@
 
 .button {
     font-size: 1.5em;
-    width: 2em;
-    height: 2em;
+    width: 3rem;
+    height: 3rem;
     margin: .3em;
 
     display: flex;
@@ -36,6 +36,7 @@
     border-radius: 50%;
 
     color: var(--font-color);
+    background-color: var(--background-color);
     opacity: 0.5;
     transition: opacity 0.3s;
 

@@ -6,17 +6,20 @@
     font-size: 0.9em;
     padding: 0.2em 1em;
 
+    margin: .3em;
+
     &__container {
         position: relative;
         width: fit-content;
         height: fit-content;
+        margin: .5em;
     }
 
     &__shadow {
         position: absolute;
         top: 0;
         left: 0;
-        transform: translate(2%, 10%) scale(1, 1.2);
+        transform: translate(-2%, 5%) scale(1, 1.2);
         z-index: -1;
         width: 90%;
         height: 120%;

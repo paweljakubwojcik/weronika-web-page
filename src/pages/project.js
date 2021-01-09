@@ -6,7 +6,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Navigation from '../components/projects-navigation/Navigation'
 import PanoramicView from '../components/panoramic-view/PanoramicView'
 
-export default function Project() {
+export default function Project({ location }) {
 
   const data = useStaticQuery(graphql`
     query {
@@ -54,7 +54,7 @@ export default function Project() {
           }
 
         </div>
-        <Navigation visible={navVisibility} />
+        <Navigation visible={navVisibility} location={location} />
       </Layout>
     </div >
   )

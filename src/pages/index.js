@@ -5,6 +5,7 @@ import HeroBackground from '../components/HeroBackground'
 import HeroImage from '../components/HeroImage'
 import Button from '../components/button/Button'
 import Akcent from '../components/color-accent'
+import { Link } from 'gatsby'
 
 import PreviewGrid from '../components/preview-grid'
 import SEO from "../components/seo"
@@ -20,8 +21,9 @@ const IndexPage = () => (
       <HeroBackground />
 
       <header className='hero-section__header'>
-        <h2>Let's create something <Akcent> together</Akcent></h2>
-        <Button className="hero-section__button" to='/'> Start now </Button>
+        <h2>Let's create something <Akcent> beautifull</Akcent></h2>
+        <Button className="hero-section__button" to='/projects'> See my work </Button>
+        <Button to='/contact'> Contact me </Button>
       </header>
 
     </section>
@@ -64,7 +66,7 @@ const IndexPage = () => (
         </h2>
       </header>
 
-      <BackgroundThing style={{ position: 'absolute', top:0 }} />
+      <BackgroundThing style={{ position: 'absolute', top: 0 }} />
 
       <PreviewGrid />
 

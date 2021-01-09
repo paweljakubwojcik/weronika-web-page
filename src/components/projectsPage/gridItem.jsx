@@ -9,7 +9,10 @@ const GridItem = ({ item, js, index }) => {
             {item && <div className="img-container" key={index}>
 
                 {js && (
-                    <Link to={`/project?id=${item.l}`}>
+                    <Link
+                        to={`/project?id=${item.l}`}
+                        state={{ modal: true }}
+                    >
                         <Img className='img-container__image' fluid={item.fluid} alt="" title="" />
                         <div className="img-container__info">
                             <span>{item.name}</span>
