@@ -13,14 +13,10 @@ exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions
 
     /* //
-    //FIXME: INVALID QUERY 
-        query randomly returns null for some fields
-        probable fix - quering for url field -  but that way we are gonna be quering heroku server every time image has to load
-        probable fix #2 - querying all imagesharp
-        probable fix #3 - change provider or redystribute assets in strapi - /TODO: CHANGE MONGOdb TO CLOUDINARY !!!
+     /TODO: CHANGE MONGOdb TO CLOUDINARY !!!
     */
 
-    console.log('Building paginated pages')
+    
     /*     const result = await graphql(`
             query MyQuery {
                 allStrapiFolders {
@@ -83,10 +79,19 @@ exports.createPages = async ({ graphql, actions }) => {
             query MyQuery {
                 allFile(filter: {sourceInstanceName: {eq: "images"}}) {
                     edges {
+                        next{
+                            name
+                        }
+                        previous{
+                            name
+                        }
                         node {
                             name
                             childImageSharp {
-                            ...GatsbyImageSharpFluid
+                                ...GatsbyImageSharpFluid
+                                fixed{
+                                    src
+                                }
                             }
                         }
                     }
@@ -94,6 +99,8 @@ exports.createPages = async ({ graphql, actions }) => {
             }
             fragment GatsbyImageSharpFluid on ImageSharp {
                 fluid {
+                    presentationHeight
+                    presentationWidth
                     aspectRatio
                     base64
                     sizes
@@ -103,14 +110,18 @@ exports.createPages = async ({ graphql, actions }) => {
             }
     `)
 
+        // TODO: ensure that every pic has unique name
         const allPics = []
-        result.data.allFile.edges.forEach(({ node }) => {
+        result.data.allFile.edges.forEach(({ node, next, previous }) => {
             allPics.push({
                 name: node.name,
-                fluid: node.childImageSharp.fluid
+                next: next?.name,
+                previous: previous?.name,
+                data: node.childImageSharp
             })
         })
 
+        console.log('Building paginated pages')
         const paginatedPageTemplate = path.resolve(`src/templates/paginatedPageTemplate.jsx`)
 
         /* Iterate needed pages and create them. */
@@ -142,6 +153,29 @@ exports.createPages = async ({ graphql, actions }) => {
             createPage(pageData)
         }
         console.log(`\nCreated ${countPages} pages of paginated content.`)
+
+
+        console.log('Building single project pages')
+        const singleItemTemplatePage = path.resolve(`src/templates/SingleProjectTemplate.jsx`)
+
+        allPics.forEach(picData => {
+
+            const { name, next, previous, data } = picData
+            const basePath = 'project'
+            const pageData = {
+                path: `/${basePath}/${name}`,
+                component: singleItemTemplatePage,
+                context: {
+                    name,
+                    nextUrl: next ? `/${basePath}/${next}` : null,
+                    previousUrl: previous ? `/${basePath}/${previous}` : null,
+                    data
+                }
+            }
+            createPage(pageData)
+        })
+
+        console.log(`\nCreated ${allPics.length} single image pages.`)
 
 
     } catch (error) {

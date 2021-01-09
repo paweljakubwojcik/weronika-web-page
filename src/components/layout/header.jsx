@@ -11,17 +11,19 @@ const Header = ({ title }) => {
       <header className='main-header'>
         <div className="main-header__title-container">
           <h1 className='main-header__title'>
-            Weronika Wójcik
-        </h1>
-          <div className="main-header__sub-title">
-            <span>INTERIOR</span>
-            <span>DESIGN</span>
-          </div>
+            <Link to='/' >
+              Weronika Wójcik
+            </Link>
+          </h1>
+        <div className="main-header__sub-title">
+          <span>INTERIOR</span>
+          <span>DESIGN</span>
         </div>
-        {title ? <h3 className="main-header__project-title" >{title}</h3> : <Navbar />}
+        </div>
+      {title ? <h3 className="main-header__project-title" >{title}</h3> : <Navbar />}
 
       </header>
-    </div>
+    </div >
   )
 }
 

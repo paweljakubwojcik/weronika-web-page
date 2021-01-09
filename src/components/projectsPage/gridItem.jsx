@@ -10,10 +10,10 @@ const GridItem = ({ item, js, index }) => {
 
                 {js && (
                     <Link
-                        to={`/project?id=${item.l}`}
+                        to={`/project/${item.name}`}
                         state={{ modal: true }}
                     >
-                        <Img className='img-container__image' fluid={item.fluid} alt="" title="" />
+                        <Img className='img-container__image' fluid={item.data.fluid} alt="" title="" />
                         <div className="img-container__info">
                             <span>{item.name}</span>
                         </div>

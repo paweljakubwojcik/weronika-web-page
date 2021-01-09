@@ -6,19 +6,30 @@ import style from './projects-navigation.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight, faTimes, faInfo, faHome } from '@fortawesome/free-solid-svg-icons'
 
-export default function Navigation({ location, next, previous, info, back = '/', visible }) {
+export default function Navigation({ location, next, previous, info, visible }) {
 
-    const { state = {} } = location
-    const { modal } = state
+    const modal = location?.state?.modal
+
 
     return (
         <div className={style.container + ' ' + (visible ? "" : style.hidden)} >
             {modal && previous &&
-                <Link to={previous} replace className={style.button} style={{ left: 0 }}>
+                <Link
+                    to={previous}
+                    state={location?.state}
+                    replace
+                    className={style.button}
+                    style={{ left: 0 }}
+                >
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </Link>}
             {modal && next &&
-                <Link to={next} replace className={style.button} style={{ right: 0 }}>
+                <Link to={next}
+                    replace
+                    state={location?.state}
+                    className={style.button}
+                    style={{ right: 0 }}
+                >
                     <FontAwesomeIcon icon={faArrowRight} />
                 </Link>}
 
