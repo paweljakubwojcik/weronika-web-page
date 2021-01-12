@@ -8,20 +8,21 @@ import PanoramicView from '../components/panoramic-view/PanoramicView'
 
 export default function Project({ location, pageContext }) {
 
-  const { name, nextUrl, previousUrl, data: { fluid, fixed } } = pageContext
 
-  const isPanoramic = false
 
-  const width = fluid?.presentationWidth;
-  const height = fluid?.presentationHeight;
-  const backgroundURL = fixed.src.replace(/([()])/g, '\\' + '$&')
+  const { name, nextUrl, previousUrl, data } = pageContext
+  const { medium, small, fluid } = data
+
+  const { full, panoramic: isPanoramic } = data
+
+  const backgroundURL = small || medium || fluid.src
 
   const [navVisibility, setNavVisibility] = useState(true)
 
 
   return (
     <div style={{ overflow: 'hidden', width: '100vw', height: '100vh' }}>
-      <div className="blur-background" style={{ backgroundImage: `url(${backgroundURL})` }}></div>
+      <img className="blur-background" src={backgroundURL} alt={name} onLoad={(e) => e.target.style.opacity = 1} />
 
 
       <Layout nonColor={true} title={name}>
@@ -29,9 +30,9 @@ export default function Project({ location, pageContext }) {
         <div className="project-container">
           {isPanoramic ?
             (
-              <PanoramicView data={fluid.src} setNavVisibility={setNavVisibility} />
+              <PanoramicView data={full} setNavVisibility={setNavVisibility} />
             ) : (
-              <Img fluid={fluid} style={{ width }} />
+              <img src={full} alt={name} style={{opacity:0}} onLoad={(e) => e.target.style.opacity = 1}/>
             )
           }
 
@@ -41,3 +42,5 @@ export default function Project({ location, pageContext }) {
     </div >
   )
 }
+
+

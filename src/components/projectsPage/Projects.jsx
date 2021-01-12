@@ -30,24 +30,19 @@ export default function Projects({ globalState, pageContext }) {
         <>
 
             <BackgroundThing />
-
-            <InfiniteScroll
-                throttle={150}
-                threshold={400}
-                hasMore={globalState.hasMore(pageContext)}
-                onLoadMore={globalState.loadMore}
-            >
-
-                <section className='galery'>
-                    <header className='section-header'>
-                        <h2>Galeria</h2>
-                    </header>
-
+            <article className='projekty-container'>
+                <InfiniteScroll
+                    throttle={150}
+                    threshold={400}
+                    hasMore={globalState.hasMore(pageContext)}
+                    onLoadMore={globalState.loadMore}
+                >
                     {/* Grid given as a child element for Infinite Scroll. */}
                     <Grid globalState={globalState} pageContext={pageContext} />
-                </section>
-            </InfiniteScroll>
 
+                </InfiniteScroll>
+
+            </article>
             {/* Loading spinner. */}
             {(globalState.cursor === 0 || globalState.hasMore(pageContext)) && (
                 <div className="spinner">

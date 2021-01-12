@@ -12,91 +12,66 @@ const fs = require('fs');
 exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions
 
-    /* //
-     /TODO: CHANGE MONGOdb TO CLOUDINARY !!!
-    */
-
-    
-    /*     const result = await graphql(`
-            query MyQuery {
-                allStrapiFolders {
-                    nodes {
-                        Name
-                        Pics {
-                            url
-                            formats {
-                                small {
-                                    childImageSharp {
-                                      ...Parts  
-                                    }
-                                }
-                                medium {
-                                    childImageSharp {
-                                        ...Parts 
-                                    }
-                                }
-                                large {
-                                    childImageSharp {
-                                        ...Parts 
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-    
-            fragment Parts on ImageSharp{
-                fixed(quality: 95, width: 300, height: 300) {
-                    src
-                }
-                fluid {
-                    originalImg
-                }
-            }
-        `)
-    
-        const allPics = []
-        result.data.allStrapiFolders.nodes.forEach(node => {
-            node.Pics.forEach((pic, i) => {
-                allPics.push({
-                    name: `${node.Name}-${i}`,
-                    large: pic.formats.large?.childImageSharp.fluid.originalImg 
-                        || pic.formats.medium?.childImageSharp.fluid.originalImg 
-                        || pic.formats.small?.childImageSharp.fluid.originalImg,
-                    
-                    small: pic.formats.large?.childImageSharp.fixed.src 
-                        || pic.formats.medium?.childImageSharp.fixed.src 
-                        || pic.formats.small?.childImageSharp.fixed.src,
-                })
-            })
-    }) */
-
-
     // querying all local pics
     try {
         const result = await graphql(`
             query MyQuery {
-                allFile(filter: {sourceInstanceName: {eq: "images"}}) {
+                allStrapiProjects {
+                    nodes {
+                        name
+                        description
+                        img {
+                            url
+                            hash
+                            formats {
+                            medium {
+                                childImageSharp {
+                                ...GatsbyImageSharpFluid
+                                }
+                                publicURL
+                            }
+                            small {
+                                childImageSharp {
+                                ...GatsbyImageSharpFluid
+                                }
+                                publicURL
+                            }
+                            thumbnail {
+                                childImageSharp {
+                                ...GatsbyImageSharpFluid
+                                }
+                                publicURL
+                            }
+                            }
+                        }
+                        }
+                }
+                
+                allStrapi360Pics {
                     edges {
-                        next{
-                            name
-                        }
-                        previous{
-                            name
-                        }
                         node {
                             name
-                            childImageSharp {
+                            description
+                            img{
+                                childImageSharp {
                                 ...GatsbyImageSharpFluid
-                                fixed{
-                                    src
+                                    original{
+                                            src
+                                        }
                                 }
+                                publicURL
                             }
+                        }
+                        next {
+                            name
+                        }
+                        previous {
+                            name
                         }
                     }
                 }
             }
+
             fragment GatsbyImageSharpFluid on ImageSharp {
                 fluid {
                     presentationHeight
@@ -107,19 +82,55 @@ exports.createPages = async ({ graphql, actions }) => {
                     src
                     srcSet
                 }
+                
             }
+       
     `)
 
+        console.log(result)
+
         // TODO: ensure that every pic has unique name
-        const allPics = []
-        result.data.allFile.edges.forEach(({ node, next, previous }) => {
-            allPics.push({
-                name: node.name,
-                next: next?.name,
+
+
+        const allPics = result.data.allStrapi360Pics.edges.map(({ previous, node, next }) => {
+            return {
+                name: `${node.name}`,
                 previous: previous?.name,
-                data: node.childImageSharp
-            })
+                next: next?.name,
+                data: {
+                    description: node.description,
+                    full: node.img.childImageSharp.original.src,
+                    fluid: node.img.childImageSharp.fluid,
+                    panoramic: true
+                }
+            }
         })
+
+        //ading every picture as separate node
+        result.data.allStrapiProjects.nodes.reduce((previousProject, currentProject, i) => {
+            currentProject.img.reduce((previous, current, index) => {
+                const { name } = currentProject
+                const { hash, formats } = current
+                const { medium, small, thumbnail } = formats
+                const entry = {
+                    name: `${name}-${index + 1}`,
+                    previous: previous?.name,
+                    data: {
+                        description: currentProject.description,
+                        full: current.url,
+                        medium: current.url.replace(`${hash}`, `medium_${hash}`),
+                        small: current.url.replace(`${hash}`, `small_${hash}`),
+                        thumbnail: current.url.replace(`${hash}`, `thumbnail_${hash}`),
+                        fluid: medium?.childImageSharp.fluid || small?.childImageSharp.fluid || thumbnail?.childImageSharp.fluid
+                    }
+                }
+                if (allPics[allPics.length - 1]) allPics[allPics.length - 1].next = entry.name
+                allPics.push(entry)
+                return entry
+            }, previousProject)
+
+            return allPics[allPics.length - 1]
+        }, allPics[allPics.length - 1])
 
         console.log('Building paginated pages')
         const paginatedPageTemplate = path.resolve(`src/templates/paginatedPageTemplate.jsx`)

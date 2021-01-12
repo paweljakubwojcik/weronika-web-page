@@ -8,6 +8,7 @@ import styles from './preview-grid.module.scss'
 
 export default function PreviewGrid() {
 
+    //TODO: create new type in strapi named 'hero-page-images' of something
     const data = useStaticQuery(graphql`
         query MyQuery {
             pics:allImageSharp(limit:6) {

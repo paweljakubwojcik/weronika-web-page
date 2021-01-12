@@ -4,6 +4,8 @@ import Img from "gatsby-image"
 
 const GridItem = ({ item, js, index }) => {
 
+    console.log(item)
+
     return (
         <>
             {item && <div className="img-container" key={index}>

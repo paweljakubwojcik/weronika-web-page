@@ -4,20 +4,20 @@ import Img from "gatsby-image"
 
 export default function HeroImage() {
   const data = useStaticQuery(graphql`
-    query {
-        image:strapiHeroImage {
-          image {
-            childImageSharp {
-              fluid(grayscale:true) {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-      }
-  `)
+     query {
+         image:strapiHeroImage {
+           image {
+             childImageSharp {
+               fluid(grayscale:true) {
+                 ...GatsbyImageSharpFluid
+               }
+             }
+           }
+         }
+       }
+   `)
 
-
+  
   if (!data?.image?.image.childImageSharp?.fluid) {
     return <div>Picture not found</div>
   }

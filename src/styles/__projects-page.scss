@@ -1,4 +1,4 @@
-.galery {
+.projekty-container {
     margin-top: 8em;
 }
 .section-header {
@@ -10,15 +10,21 @@
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 2em;
     margin: 1em;
     min-width: 250px;
+    min-height: 250px;
 
-    @media (min-width: 800px) {
-        :nth-child(13n + 1) {
-            grid-column-end: span 2;
-            grid-row-end: span 2;
+    &.with-specials {
+
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+        @media (min-width: 800px) {
+            :nth-child(13n + 1) {
+                grid-column-end: span 2;
+                grid-row-end: span 2;
+            }
         }
     }
 
@@ -33,7 +39,7 @@
         &__image {
             top: 0;
             display: block;
-            position: absolute;
+            //position: absolute;
             height: 100%;
             margin: 0;
             transition: opacity 0.2s;
