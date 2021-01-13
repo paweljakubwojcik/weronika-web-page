@@ -25,7 +25,7 @@ export default function Project({ location, pageContext }) {
       <img className="blur-background" src={backgroundURL} alt={name} onLoad={(e) => e.target.style.opacity = 1} />
 
 
-      <Layout nonColor={true} title={name}>
+      <Layout nonColor={true} title={name} filled={true}>
         <SEO title={name} />
         <div className="project-container">
           {isPanoramic ?

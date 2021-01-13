@@ -58,7 +58,7 @@ const IndexPage = () => (
 
     </section>
 
-    <section id='projects' className='projects-section'>
+    <section id='projects' className='section projects-section'>
       <header className='projects-section__header'>
         <h2>
           Find

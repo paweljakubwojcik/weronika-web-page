@@ -7,9 +7,14 @@
     display: flex;
     justify-content: center;
 
-    background-color: var(--sidebar-color);
+   
     margin: 2em 0 0 0;
     padding: 0 1em;
+
+    &.container--filled{
+        background-color: var(--sidebar-color);
+       // box-shadow: var(--shadow);
+    }
 }
 
 .main-header {

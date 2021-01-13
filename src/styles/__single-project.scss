@@ -5,9 +5,8 @@
     height: 100%;
 
     opacity: 0;
-    background-position: center;
-    background-size: cover;
-    filter: blur(10px) brightness(0.99) grayscale(0.5);
+    
+    filter: blur(20px) brightness(0.9) grayscale(0.4);
 
     transition: opacity 0.2s;
 }
@@ -31,5 +30,7 @@
         transition: opacity 0.2s;
         max-width: 100vw;
         max-height: 100%;
+
+        box-shadow: var(--shadow);
     }
 }
