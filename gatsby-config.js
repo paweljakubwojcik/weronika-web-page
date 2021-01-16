@@ -28,8 +28,8 @@ module.exports = {
       resolve: `gatsby-source-strapi`,
       options: {
         apiURL: `https://cms-strapi-weronika-wojcik.herokuapp.com`,
-        queryLimit: 1000, // Default to 100
-        contentTypes: [`360-pics`, `projects`],
+        queryLimit: 100, // Default to 100
+        contentTypes: [],
         //If using single types place them in this array.
         singleTypes: [`hero-image`, `hero-description`],
         // Possibility to login with a strapi user, when content types are not publically available (optional).
@@ -39,7 +39,7 @@ module.exports = {
         },
       },
     },
-    
+
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

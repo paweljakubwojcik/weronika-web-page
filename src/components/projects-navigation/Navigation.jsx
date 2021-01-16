@@ -1,22 +1,41 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React, { useEffect } from 'react'
+import { Link, navigate } from 'gatsby'
 
 import style from './projects-navigation.module.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight, faTimes, faInfo, faHome } from '@fortawesome/free-solid-svg-icons'
 
-export default function Navigation({ location, next, previous, info, visible }) {
+export default function Navigation({ state, next, previous, info, visible }) {
 
-    const modal = location?.state?.modal
+    const { modal } = state
+
+    const handleKeyDown = (event) => {
+        if (event.keyCode === 37) {
+            /* Left arrow. */
+            navigate(previous, { state, replace: true })
+        } else if (event.keyCode === 39) {
+            /* Right arrow. */
+            navigate(next, { state, replace: true })
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown)
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [])
+
+    console.log({ next, previous })
 
 
     return (
-        <div className={style.container + ' ' + (visible ? "" : style.hidden)} >
+        <div className={style.container + ' ' + (visible ? "" : style.hidden)} onKeyDown={() => console.log('key')}>
             {modal && previous &&
                 <Link
                     to={previous}
-                    state={location?.state}
+                    state={state}
                     replace
                     className={style.button}
                     style={{ left: 0 }}
@@ -26,7 +45,7 @@ export default function Navigation({ location, next, previous, info, visible }) 
             {modal && next &&
                 <Link to={next}
                     replace
-                    state={location?.state}
+                    state={state}
                     className={style.button}
                     style={{ right: 0 }}
                 >

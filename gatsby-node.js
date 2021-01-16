@@ -6,131 +6,66 @@
 
 // You can delete this file if you're not using it
 
+const { getDataFromCMS } = require('./loader')
 const path = require(`path`)
 const fs = require('fs');
 
-exports.createPages = async ({ graphql, actions }) => {
+
+
+exports.createPages = async ({ actions }) => {
     const { createPage } = actions
 
-    // TODO: reduce this query, write this functions from the beggining 
     try {
-        const result = await graphql(`
-            query MyQuery {
-                allStrapiProjects {
-                    nodes {
-                        name
-                        description
-                        img {
-                            url
-                            hash
-                            formats {
-                            medium {
-                                childImageSharp {
-                                ...GatsbyImageSharpFluid
-                                }
-                                publicURL
-                            }
-                            small {
-                                childImageSharp {
-                                ...GatsbyImageSharpFluid
-                                }
-                                publicURL
-                            }
-                            thumbnail {
-                                childImageSharp {
-                                ...GatsbyImageSharpFluid
-                                }
-                                publicURL
-                            }
-                            }
-                        }
-                        }
-                }
-                
-                allStrapi360Pics {
-                    edges {
-                        node {
-                            name
-                            
-                            img{
-                                childImageSharp {
-                                ...GatsbyImageSharpFluid
-                                    original{
-                                            src
-                                        }
-                                }
-                                publicURL
-                            }
-                        }
-                        next {
-                            name
-                        }
-                        previous {
-                            name
-                        }
-                    }
-                }
-            }
 
-            fragment GatsbyImageSharpFluid on ImageSharp {
-                fluid {
-                    presentationHeight
-                    presentationWidth
-                    aspectRatio
-                    base64
-                    sizes
-                    src
-                    srcSet
-                }
-                
-            }
-       
-    `)
+        const result = await getDataFromCMS()
 
-        console.log(result)
+        const allPics = []
+        result.pic360.forEach((node, i) => {
 
-        // TODO: ensure that every pic has unique name
+            const { name, description, img } = node
 
-
-        const allPics = result.data.allStrapi360Pics.edges.map(({ previous, node, next }) => {
-            return {
-                name: `${node.name}`,
-                previous: previous?.name,
-                next: next?.name,
+            allPics.push({
+                name: `${name}`,
                 data: {
-                    description: node.description,
-                    full: node.img.childImageSharp.original.src,
-                    fluid: node.img.childImageSharp.fluid,
+                    description,
+                    full: img.url,
+                    medium: img.formats.medium?.url,
+                    small: img.formats.small?.url,
+                    thumbnail: img.formats.thumbnail?.url,
                     panoramic: true
                 }
-            }
+            })
+
+            allPics[i].previous = allPics[i - 1]?.name
+            if (allPics[i - 1]) allPics[i - 1].next = allPics[i].name
+
         })
 
         //adding every picture as separate node
-        result.data.allStrapiProjects.nodes.reduce((previousProject, currentProject, i) => {
-            currentProject.img.reduce((previous, current, index) => {
-                const { name } = currentProject
-                const { hash, formats } = current
-                const { medium, small, thumbnail } = formats
-                const entry = {
-                    name: `${name}-${index + 1}`,
-                    previous: previous?.name,
-                    data: {
-                        description: currentProject.description,
-                        full: current.url,
-                        medium: current.url.replace(`${hash}`, `medium_${hash}`),
-                        small: current.url.replace(`${hash}`, `small_${hash}`),
-                        thumbnail: current.url.replace(`${hash}`, `thumbnail_${hash}`),
-                        fluid: medium?.childImageSharp.fluid || small?.childImageSharp.fluid || thumbnail?.childImageSharp.fluid
-                    }
-                }
-                if (allPics[allPics.length - 1]) allPics[allPics.length - 1].next = entry.name
-                allPics.push(entry)
-                return entry
-            }, previousProject)
+        result.projects.forEach((project) => {
+            const { name, img, description } = project
 
-            return allPics[allPics.length - 1]
-        }, allPics[allPics.length - 1])
+            img.forEach((node, index) => {
+                const { url, formats, width, height } = node
+                const { medium, small, thumbnail } = formats
+
+                allPics.push({
+                    name: `${name}-${index + 1}`,
+                    data: {
+                        description,
+                        full: url,
+                        medium: medium?.url,
+                        small: small?.url,
+                        thumbnail: thumbnail?.url,
+                        width,
+                        height
+                    }
+                })
+                const i = allPics.length - 1
+                allPics[i].previous = allPics[i - 1]?.name
+                if (allPics[i - 1]) allPics[i - 1].next = allPics[i].name
+            })
+        })
 
         console.log('Building paginated pages')
         const paginatedPageTemplate = path.resolve(`src/templates/paginatedPageTemplate.jsx`)
@@ -161,7 +96,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
             /* Create normal pages (for pagination) and corresponding JSON (for infinite scroll). */
             createJSON(pageData)
-            createPage(pageData)
+            if (currentPage === 1)
+                createPage(pageData)
         }
         console.log(`\nCreated ${countPages} pages of paginated content.`)
 
@@ -170,17 +106,16 @@ exports.createPages = async ({ graphql, actions }) => {
         const singleItemTemplatePage = path.resolve(`src/templates/SingleProjectTemplate.jsx`)
 
         allPics.forEach(picData => {
-
-            const { name, next, previous, data } = picData
+            const { name, next, previous } = picData
             const basePath = 'project'
             const pageData = {
                 path: `/${basePath}/${name}`,
                 component: singleItemTemplatePage,
                 context: {
-                    name,
-                    nextUrl: next ? `/${basePath}/${next}` : null,
-                    previousUrl: previous ? `/${basePath}/${previous}` : null,
-                    data
+                    url: `/${basePath}/${name}`,
+                    previousUrl: `/${basePath}/${previous}`,
+                    nextUrl: `/${basePath}/${next}`,
+                    ...picData,
                 }
             }
             createPage(pageData)

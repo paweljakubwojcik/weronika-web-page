@@ -22,12 +22,14 @@
     "gatsby-source-strapi": "0.0.12",
     "gatsby-transformer-sharp": "^2.6.0",
     "lodash.throttle": "^4.1.1",
+    "node-fetch": "^2.6.1",
     "node-sass": "^4.14.1",
     "npm": "^6.14.11",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
+    "react-progressive-image": "^0.6.0",
     "three": "^0.124.0"
   },
   "devDependencies": {

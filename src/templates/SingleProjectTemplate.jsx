@@ -1,24 +1,20 @@
 import React, { useState } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import Layout from '../components/layout/layout'
 import SEO from '../components/seo'
-import Img from 'gatsby-image'
 import Navigation from '../components/projects-navigation/Navigation'
 import PanoramicView from '../components/panoramic-view/PanoramicView'
+import ProgressiveImage from 'react-progressive-image'
 
 export default function Project({ location, pageContext }) {
 
-
-
   const { name, nextUrl, previousUrl, data } = pageContext
-  const { medium, small, fluid } = data
+  const { thumbnail, medium, small, full, width, height, panoramic: isPanoramic } = data
 
-  const { full, panoramic: isPanoramic } = data
-
-  const backgroundURL = small || medium || fluid.src
+  const backgroundURL = thumbnail || small || medium
 
   const [navVisibility, setNavVisibility] = useState(true)
 
+  const dimensions = { width, height }
 
   return (
     <div style={{ overflow: 'hidden', width: '100vw', height: '100vh' }}>
@@ -32,12 +28,18 @@ export default function Project({ location, pageContext }) {
             (
               <PanoramicView data={full} setNavVisibility={setNavVisibility} />
             ) : (
-              <img src={full} alt={name} style={{opacity:0}} onLoad={(e) => e.target.style.opacity = 1}/>
+              <ProgressiveImage
+                src={full}
+                placeholder={thumbnail}>
+                {(src, loading) =>
+                  <img src={src} alt={name} style={{ width }} />
+                }
+              </ProgressiveImage>
             )
           }
 
         </div>
-        <Navigation visible={navVisibility} location={location} next={nextUrl} previous={previousUrl} />
+        <Navigation visible={navVisibility} state={location?.state} next={nextUrl} previous={previousUrl} />
       </Layout>
     </div >
   )

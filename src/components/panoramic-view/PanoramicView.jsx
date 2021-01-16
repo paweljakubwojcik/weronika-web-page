@@ -28,7 +28,7 @@ const controlsMinDistance = 1000;
 export default function PanoramicView({ data, setNavVisibility }) {
 
     const scene = useMemo(() => new Scene(), [])
-    const camera = useMemo(() => new PerspectiveCamera(fov, aspectRatio, near, far), [fov, aspectRatio, near, far]);
+    const camera = useMemo(() => new PerspectiveCamera(fov, aspectRatio, near, far), []);
     const renderer = useMemo(() => new WebGLRenderer(), []);
 
     camera.position.set(...cameraInitialPosition);

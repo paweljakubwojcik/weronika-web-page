@@ -17,7 +17,6 @@ export default function HeroImage() {
        }
    `)
 
-  
   if (!data?.image?.image.childImageSharp?.fluid) {
     return <div>Picture not found</div>
   }
