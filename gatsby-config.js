@@ -27,7 +27,7 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `http://localhost:1337`,
+        apiURL: `https://cms-strapi-weronika-wojcik.herokuapp.com`,
         queryLimit: 1000, // Default to 100
         contentTypes: [`360-pics`, `projects`],
         //If using single types place them in this array.

@@ -12,7 +12,7 @@ const fs = require('fs');
 exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions
 
-    // querying all local pics
+    // TODO: reduce this query, write this functions from the beggining 
     try {
         const result = await graphql(`
             query MyQuery {
@@ -51,7 +51,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     edges {
                         node {
                             name
-                            description
+                            
                             img{
                                 childImageSharp {
                                 ...GatsbyImageSharpFluid
@@ -106,7 +106,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
         })
 
-        //ading every picture as separate node
+        //adding every picture as separate node
         result.data.allStrapiProjects.nodes.reduce((previousProject, currentProject, i) => {
             currentProject.img.reduce((previous, current, index) => {
                 const { name } = currentProject
