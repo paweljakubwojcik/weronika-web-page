@@ -6,6 +6,8 @@ const Grid = (props) => {
     const g = props.globalState
     const currentPage = props.pageContext.currentPage
 
+    console.log('render')
+
     const items = []
     var i = 0, j = 0, numberOfItemsOnLatestPage = 0
     const js = !g.isInitializing()
@@ -20,14 +22,6 @@ const Grid = (props) => {
                 }
             }
             else {
-                const lastFetchedPage = Math.min(g.cursor, props.pageContext.countPages)
-                for (; pageNum <= lastFetchedPage; pageNum++) {
-                    /* For each page that we have fetched, but haven't received metadata for, render empty gridItems. */
-                    const expectedNumberOfItemsOnPage = numberOfItemsOnLatestPage
-                    for (j = 0; j < expectedNumberOfItemsOnPage; j++) {
-                        items.push(<GridItem key={"gi" + (i++)} />)
-                    }
-                }
                 /* Don't add anything for pages that the user hasn't fetched (scrolled to) yet. */
                 break;
             }
@@ -46,20 +40,20 @@ const Grid = (props) => {
 
     const pics360 = items.filter(node => node.props.item.data.panoramic)
     const projects = items.filter(node => !node.props.item.data.panoramic)
+
+    console.log(items)
     return (
         <>
             {pics360 && <Section title={'Wizualizacje'}> {pics360}</Section>}
             {projects && <Section title={'Galeria'}> {projects}</Section>}
         </>
     )
-
 }
 
 export default Grid;
 
 const Section = ({ children, title }) => {
     const withSpecials = children[1].length >= 7
-    console.log(children)
     return (
         <section className='galery'>
             <header className='section-header'>
