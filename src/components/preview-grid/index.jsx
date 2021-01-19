@@ -9,7 +9,7 @@ import styles from './preview-grid.module.scss'
 export default function PreviewGrid() {
 
     //TODO: create new type in strapi named 'hero-page-images' of something
-    /* const data = useStaticQuery(graphql`
+    const data = useStaticQuery(graphql`
         query MyQuery {
             pics:allImageSharp(limit:6) {
                 nodes {
@@ -26,22 +26,22 @@ export default function PreviewGrid() {
                  ...GatsbyImageSharpFluid
             }
         }
-    `) */
+    `)
 
 
-    //const pics = data.pics.nodes
+    const pics = data.pics.nodes
 
-    return null
+
 
     return (
-        {/* <div className={styles.container}>
+        <div className={styles.container}>
             <div className={styles.columnLeft + ' ' + styles.column}>
                 {pics.slice(0, pics.length / 2).map(pic => <ImageLink fluid={pic.fluid} to={'/'} />)}
             </div>
             <div className={styles.columnRight + ' ' + styles.column}>
                 {pics.slice(pics.length / 2, pics.length).map(pic => <ImageLink fluid={pic.fluid} to={'/'} />)}
             </div>
-        </div> */}
+        </div>
     )
 
 }

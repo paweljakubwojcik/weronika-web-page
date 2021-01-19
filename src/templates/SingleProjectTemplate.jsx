@@ -14,7 +14,16 @@ export default function Project({ location, pageContext }) {
 
   const [navVisibility, setNavVisibility] = useState(true)
 
-  const dimensions = { width, height }
+  const loadingDimensions = { width, height }
+  if (height > window.innerHeight) {
+    loadingDimensions.height = window.innerHeight
+    loadingDimensions.width = window.innerHeight * width / height
+  }
+  if (width > window.innerWidth) {
+    loadingDimensions.height = window.innerHeight * height / width
+    loadingDimensions.width = window.innerWidth
+  }
+
 
   return (
     <div style={{ overflow: 'hidden', width: '100vw', height: '100vh' }}>
@@ -32,7 +41,7 @@ export default function Project({ location, pageContext }) {
                 src={full}
                 placeholder={thumbnail}>
                 {(src, loading) =>
-                  <img src={src} alt={name} style={{ width }} />
+                  <img src={src} alt={name} style={loading ? { ...loadingDimensions } : {}} />
                 }
               </ProgressiveImage>
             )

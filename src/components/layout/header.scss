@@ -7,13 +7,12 @@
     display: flex;
     justify-content: center;
 
-   
     margin: 2em 0 0 0;
     padding: 0 1em;
 
-    &.container--filled{
+    &.container--filled {
         background-color: var(--sidebar-color);
-       // box-shadow: var(--shadow);
+        // box-shadow: var(--shadow);
     }
 }
 
@@ -144,6 +143,10 @@ $break-point: 800px;
                 transform: scale(1);
                 filter: blur(0) opacity(1);
             }
+        }
+
+        &--active {
+            font-weight: bold;
         }
     }
 }

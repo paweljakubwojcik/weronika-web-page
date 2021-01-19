@@ -9,13 +9,18 @@ const Header = ({ title, filled }) => {
 
   const [isScrolled, setIsScrolled] = useState(false)
 
+  const handleScroll = () => {
+    if (window.scrollY > 10)
+      setIsScrolled(true)
+    else
+      setIsScrolled(false)
+  }
+
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 10)
-        setIsScrolled(true)
-      else
-        setIsScrolled(false)
-    })
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
   }, [])
 
   return (

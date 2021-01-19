@@ -33,7 +33,8 @@
     }
 
     img {
-        max-width: unset;
-        max-height: unset;
+        display: block;
+        width: auto;
+       height: auto;
     }
 }

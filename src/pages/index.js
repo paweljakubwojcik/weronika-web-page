@@ -14,16 +14,15 @@ import '../styles/index.scss'
 import BackgroundThing from "../components/background-thing/BackgroundThing"
 
 const IndexPage = () => (
-  <Layout>
+  <Layout >
     <SEO title="Home" />
-
-    <section className='section hero-section'>
+    <section id='home' className='section hero-section'>
       <HeroBackground />
 
       <header className='hero-section__header'>
-        <h2>Let's create something <Akcent> beautifull</Akcent></h2>
+        <h2>Let's create <br /> something <br /> <Akcent> beautifull</Akcent></h2>
         <Button className="hero-section__button" to='/projects'> See my work </Button>
-        <Button to='/contact'> Contact me </Button>
+        <Button className="hero-section__button" to='/contact'> Contact me </Button>
       </header>
 
     </section>
@@ -61,8 +60,8 @@ const IndexPage = () => (
     <section id='projects' className='section projects-section'>
       <header className='projects-section__header'>
         <h2>
-          Find
-                <Akcent> Inspiration</Akcent>
+          My
+                <Akcent> Work</Akcent>
         </h2>
       </header>
 
