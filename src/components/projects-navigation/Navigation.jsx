@@ -8,7 +8,7 @@ import { faArrowLeft, faArrowRight, faTimes, faInfo, faHome } from '@fortawesome
 
 export default function Navigation({ state, next, previous, info, visible }) {
 
-    const { modal } = state
+    const modal = state?.modal
 
     const handleKeyDown = (event) => {
         if (event.keyCode === 37) {
@@ -26,8 +26,6 @@ export default function Navigation({ state, next, previous, info, visible }) {
             window.removeEventListener('keydown', handleKeyDown)
         }
     }, [])
-
-    console.log({ next, previous })
 
 
     return (

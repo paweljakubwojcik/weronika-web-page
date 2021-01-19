@@ -6,7 +6,7 @@ import ProgressiveImage from "react-progressive-image"
 const GridItem = ({ item, index }) => {
 
     const { data, name } = item
-    const { full, medium, small, thumbnail } = data
+    const { medium, small, thumbnail } = data
 
     const [error, setError] = useState(null)
 
@@ -14,13 +14,13 @@ const GridItem = ({ item, index }) => {
         <>
             {item &&
                 <ProgressiveImage
-                    src={medium}
+                    src={small}
                     srcSetData={{
                         srcSet: `${small} 500w ${medium} 750w`,
                         sizes: '(max-width: 750px) 750px, 750px'
                     }}
                     placeholder={thumbnail}
-                    delay={100}
+                    //delay={100}
                     onError={() => { setError(true) }}
                 >
                     {(src, _loading, srcSetData) => (

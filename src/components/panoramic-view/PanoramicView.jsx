@@ -31,8 +31,7 @@ export default function PanoramicView({ data, setNavVisibility }) {
     const camera = useMemo(() => new PerspectiveCamera(fov, aspectRatio, near, far), []);
     const renderer = useMemo(() => new WebGLRenderer(), []);
 
-    camera.position.set(...cameraInitialPosition);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    
 
     function render() {
         requestAnimationFrame(() => renderer.render(scene, camera));
@@ -61,6 +60,9 @@ export default function PanoramicView({ data, setNavVisibility }) {
         if (canvas) {
             console.log('creating panoramic view')
 
+            camera.position.set(...cameraInitialPosition);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
             let skySphereGeo = new SphereGeometry(100000, 100, 100);
             // texture loader is async, so it takes callback
             let textureSphere = new TextureLoader().load(data, () => { render(); setVisible(true) });
@@ -76,7 +78,7 @@ export default function PanoramicView({ data, setNavVisibility }) {
             canvas.appendChild(renderer.domElement);
             scene.add(skySphere)
         }
-    }, [canvas])
+    }, [canvas, camera, renderer])
 
     return (
         <div ref={setCanvas}
