@@ -10,9 +10,12 @@
     margin: 2em 0 0 0;
     padding: 0 1em;
 
+    transition: background-color .3s, font-size .3s;
+
     &.container--filled {
         background-color: var(--sidebar-color);
         // box-shadow: var(--shadow);
+        font-size: .9em;
     }
 }
 
