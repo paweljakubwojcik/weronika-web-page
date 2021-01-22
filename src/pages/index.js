@@ -12,6 +12,7 @@ import SEO from "../components/seo"
 
 import '../styles/index.scss'
 import BackgroundThing from "../components/background-thing/BackgroundThing"
+import HeroDescription from "../components/HeroDescription"
 
 const IndexPage = () => (
   <Layout >
@@ -35,24 +36,7 @@ const IndexPage = () => (
       <HeroImage />
 
       <div className="about-section__content">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Quaerat perferendis sed nulla ducimus, minima necessitatibus
-          suscipit. Aliquid exercitationem corporis magni eos porro nesciunt
-          ex repellat suscipit, cumque qui numquam aut.
-                </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Quaerat perferendis sed nulla ducimus, minima necessitatibus
-          suscipit. Aliquid exercitationem corporis magni eos porro nesciunt
-          ex repellat suscipit, cumque qui numquam aut.
-                </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Quaerat perferendis sed nulla ducimus, minima necessitatibus
-          suscipit. Aliquid exercitationem corporis magni eos porro nesciunt
-          ex repellat suscipit, cumque qui numquam aut.
-                </p>
+        <HeroDescription />
       </div>
 
     </section>
@@ -70,6 +54,10 @@ const IndexPage = () => (
       <PreviewGrid />
 
       <Button className='projects-section__button' to='/projects'> More projects </Button>
+    </section>
+
+    <section id='contact' className='section contact-section'>
+        
     </section>
   </Layout>
 )
