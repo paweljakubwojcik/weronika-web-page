@@ -1,6 +1,7 @@
 .wrapper {
   max-width: 1400px;
   min-height: 100vh;
+  width: 100%;
   position: relative;
   margin: 0 auto;
   padding: 0;
@@ -11,8 +12,7 @@
 }
 
 .main-footer {
-  
   position: absolute;
-  bottom:0;
+  bottom: 0;
   z-index: 101;
 }

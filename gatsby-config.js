@@ -31,7 +31,7 @@ module.exports = {
         queryLimit: 100, // Default to 100
         contentTypes: [],
         //If using single types place them in this array.
-        singleTypes: [`hero-image`, `hero-description`],
+        singleTypes: [`hero-image`, `hero-description`, 'hero-projects'],
         // Possibility to login with a strapi user, when content types are not publically available (optional).
         loginData: {
           identifier: "",
