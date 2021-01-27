@@ -37,7 +37,7 @@ export default function PreviewGrid() {
     data.projects.projects.forEach(project => {
         project.img.forEach((pic, i) => {
             pics.push({
-                name: `${project.name}-${i}`,
+                name: `${project.name}-${i + 1}`,
                 data: {
                     full: pic.url,
                     medium: pic.formats.medium.url,

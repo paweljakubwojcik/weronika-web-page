@@ -23,7 +23,7 @@ export default function HeroImage() {
 
   return (
     <div className="hero-image">
-      <div className="hero-image__text">Designer</div>
+      {/* <div className="hero-image__text">Designer</div> */}
       <Img fluid={data.image.image.childImageSharp.fluid} />
     </div>
   )
