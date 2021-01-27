@@ -1,6 +1,8 @@
-@import './global.scss';
-@import './about-section.scss';
-@import './hero-section.scss';
-@import './projects-section.scss';
-@import '_projects-page';
-@import '_single-project';
+@import "variables";
+@import "./global.scss";
+@import "./about-section.scss";
+@import "./hero-section.scss";
+@import "./contact-section.scss";
+@import "./projects-section.scss";
+@import "_projects-page";
+@import "_single-project";
