@@ -77,6 +77,7 @@ export default function PanoramicView({ data, setNavVisibility }) {
 
             canvas.appendChild(renderer.domElement);
             scene.add(skySphere)
+            camera.updateProjectionMatrix();
         }
     }, [canvas, camera, renderer])
 
