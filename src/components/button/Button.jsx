@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import style from './button.module.scss'
-import Shadow from '../../assets/svg/Shadow_thingy.svg'
+import Shadow from '../shadow-thingy/Shadow'
 
 export default function Button({ children, className, as = 'link', ...rest }) {
     return (

@@ -22,7 +22,7 @@ const IndexPage = () => (
       <HeroBackground />
 
       <header className='hero-section__header'>
-        <h2>Let's create <br /> something <br /> <Akcent> beautifull</Akcent></h2>
+        <h2>Let's create <br /> something <br /> <Akcent style={ { fontSize: "1.3em" } }> beautifull</Akcent></h2>
         <Button className="hero-section__button" to='/projects'> See my work </Button>
         <Button className="hero-section__button" to='/#contact'> Contact me </Button>
       </header>
