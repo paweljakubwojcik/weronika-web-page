@@ -2,42 +2,53 @@
     background-color: var(--main-color);
     color: var(--background-color);
 
-    border-radius: .4em;
+    display: block;
+
+    border-radius: 0.1em;
 
     font-weight: bold;
     font-size: 0.9em;
     padding: 0.2em 1em;
 
-    margin: .3em;
-
     &__container {
         position: relative;
         width: fit-content;
         height: fit-content;
-        margin: .5em;
+        margin: 0.5em;
+
+        &:hover {
+           
+            .button__shadow {
+                transform: scale(.9);
+                transform: translate(-5%, 25%);
+            }
+        }
     }
 
     &__shadow {
         position: absolute;
         top: 0;
         left: 0;
-        transform: translate(-2%, 5%) scale(1, 1.2);
+        transform: translate(-7%, 30%) scale(1);
         z-index: -1;
-        width: 90%;
-        height: 120%;
-        fill: var(--background-color);
+        width: 100%;
+        height: 100%;
+        color: var(--main-color);
+        filter: opacity(0.4) brightness(0.5);
+        transition: transform 0.4s;
         path {
             transition: 0.4s;
         }
+
         /* animation: squeezing 5s infinite linear; */
     }
 
-    transition: filter 0.3s, padding 0.3s;
+    transition: filter 0.3s, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     &:hover {
-        filter: brightness(1.2);
+        filter: brightness(1.1);
         cursor: pointer;
-       /*  padding: 0.2em 2em; */
+         transform: scale(1.05);
     }
 }
 
