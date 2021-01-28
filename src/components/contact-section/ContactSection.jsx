@@ -5,19 +5,23 @@ import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons'
 
 import MailForm from './MailForm'
+import PhoneNumber from './PhoneNumber'
 
 const buttons = [
     {
         name: 'mail',
-        icon: faEnvelope
+        icon: faEnvelope,
+        component: <MailForm />
     },
     {
         name: 'messenger',
-        icon: faFacebookMessenger
+        icon: faFacebookMessenger,
+        component: <div />
     },
     {
         name: 'phone',
-        icon: faPhone
+        icon: faPhone,
+        component: <PhoneNumber />
     },
 ]
 
@@ -28,7 +32,9 @@ export default function ContactSection() {
 
     return (
         <div className='contact-section__content'>
-            <MailForm />
+            {buttons.map(({ name, component }) =>
+                active === name && component
+            )}
             <Switch active={active} setActive={setActive} />
         </div>
     )
