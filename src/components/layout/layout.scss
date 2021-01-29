@@ -1,5 +1,5 @@
 .wrapper {
-  max-width: 1400px;
+  max-width: var(--content-width);
   min-height: 100vh;
   width: 100%;
   position: relative;

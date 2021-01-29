@@ -30,7 +30,8 @@ body {
 
   font-size: 16px;
   transition: font-size 0.2s;
-  @media (max-width: 800px) {
+
+  @include breakpoint-down(medium) {
     font-size: 12px;
   }
 }
@@ -86,7 +87,7 @@ li {
     border-bottom: 1px solid var(--main-color);
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: $contentWidth) {
     overflow-x: hidden;
   }
 }
