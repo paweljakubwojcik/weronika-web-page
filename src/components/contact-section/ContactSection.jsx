@@ -21,6 +21,7 @@ const buttons = [
     {
         name: 'messenger',
         icon: faFacebookMessenger,
+        //TODO: messenger component
         Component: null
     },
     {

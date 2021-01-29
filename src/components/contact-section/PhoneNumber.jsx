@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function PhoneNumber({ timeout }) {
 
-
+    //TODO: fetch this from strapi
     const number = '999243111'
 
     return (
