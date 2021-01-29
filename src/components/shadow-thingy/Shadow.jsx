@@ -9,6 +9,6 @@ export default ({ className, big, ...rest }) => {
     const ShadowElement = big ? BigShadow : Shadow
 
     return (
-        <ShadowElement className={style.shadow + ' ' + className} {...rest} />
+        <ShadowElement className={style.shadow + ' shadow ' + className} {...rest} />
     )
 }

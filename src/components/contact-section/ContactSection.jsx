@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { TransitionGroup, CSSTransition, SwitchTransition } from 'react-transition-group'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons'
@@ -7,21 +9,24 @@ import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons'
 import MailForm from './MailForm'
 import PhoneNumber from './PhoneNumber'
 
+
+const transitionTimeout = 500;
+
 const buttons = [
     {
         name: 'mail',
         icon: faEnvelope,
-        component: <MailForm />
+        Component: MailForm
     },
     {
         name: 'messenger',
         icon: faFacebookMessenger,
-        component: <div />
+        Component: null
     },
     {
         name: 'phone',
         icon: faPhone,
-        component: <PhoneNumber />
+        Component: PhoneNumber
     },
 ]
 
@@ -32,9 +37,15 @@ export default function ContactSection() {
 
     return (
         <div className='contact-section__content'>
-            {buttons.map(({ name, component }) =>
-                active === name && component
-            )}
+            <SwitchTransition>
+                <CSSTransition key={active} timeout={transitionTimeout} classNames="switch-transition">
+                    <>
+                        {buttons.map(({ name, Component }) =>
+                            name === active && <Component timeout={transitionTimeout} key={name} />
+                        )}
+                    </>
+                </CSSTransition>
+            </SwitchTransition>
             <Switch active={active} setActive={setActive} />
         </div>
     )

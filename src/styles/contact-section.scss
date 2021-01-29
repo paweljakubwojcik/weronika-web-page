@@ -4,6 +4,11 @@
         grid-template-columns: 1fr 1fr;
         min-height: 400px;
         padding: 3em 1em;
+
+        justify-items: center;
+        align-content: center;
+
+        height: 40em;
     }
 }
 
@@ -119,5 +124,87 @@
     &__button {
         margin-left: auto;
         font-size: 1.5em;
+    }
+
+    &.switch-transition-enter {
+        &:nth-child(n),
+        .shadow {
+            opacity: 0;
+            transform: translateX(2em);
+        }
+    }
+    &.switch-transition-enter-active {
+        &:nth-child(n),
+        .shadow {
+            opacity: 1;
+            transform: translateX(0);
+
+            transition: opacity, transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition-duration: 300ms;
+        }
+        .shadow {
+            transition-delay: 100ms;
+        }
+    }
+    &.switch-transition-exit {
+        &:nth-child(n),
+        .shadow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    &.switch-transition-exit-active {
+        &:nth-child(n),
+        .shadow {
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity, transform cubic-bezier(0.6, -0.28, 0.735, 0.045);
+            transition-duration: 300ms;
+        }
+        .shadow {
+            transform: translateX(2em);
+            transition: opacity 0.3, transform 0.3s;
+            transition-delay: 100ms;
+        }
+    }
+}
+
+.phone-number {
+    font-weight: bold;
+    font-size: 2em;
+    color: var(--main-color);
+
+    display: flex;
+
+    &.switch-transition-enter {
+        span {
+            opacity: 0;
+            transform: translateY(2em);
+        }
+    }
+    &.switch-transition-enter-active {
+        span {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity, transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    }
+    &.switch-transition-exit {
+        span {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    &.switch-transition-exit-active {
+        span {
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity, transform cubic-bezier(0.6, -0.28, 0.735, 0.045);
+        }
+    }
+
+    span {
+        margin: 0.05em;
+        display: block;
     }
 }

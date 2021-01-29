@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Button from '../button/Button'
 import Shadow from '../shadow-thingy/Shadow'
 
-export default function MailForm() {
+export default function MailForm({ timeout }) {
 
     const [values, setValues] = useState({})
 
@@ -25,7 +25,14 @@ export default function MailForm() {
 
 
     return (
-        <form onSubmit={handleSubmit} onChange={handleChange} className='form'>
+        <form
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+            className='form'
+            style={{
+                transitionDuration: `${timeout}ms`
+            }}
+        >
             <Input name='email' label={'Your email'} values={values}>
                 <input type="email" name="email" className='form__input' />
             </Input>
