@@ -38,15 +38,17 @@ export default function ContactSection() {
 
     return (
         <div className='contact-section__content'>
-            <SwitchTransition>
-                <CSSTransition key={active} timeout={transitionTimeout} classNames="switch-transition">
-                    <>
-                        {buttons.map(({ name, Component }) =>
-                            name === active && <Component timeout={transitionTimeout} key={name} />
-                        )}
-                    </>
-                </CSSTransition>
-            </SwitchTransition>
+            <div className="contact-section__content-container">
+                <SwitchTransition>
+                    <CSSTransition key={active} timeout={transitionTimeout} classNames="switch-transition">
+                        <>
+                            {buttons.map(({ name, Component }) =>
+                                name === active && Component && <Component timeout={transitionTimeout} key={name} />
+                            )}
+                        </>
+                    </CSSTransition>
+                </SwitchTransition>
+            </div>
             <Switch active={active} setActive={setActive} />
         </div>
     )
