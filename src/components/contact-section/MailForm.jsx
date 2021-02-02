@@ -33,7 +33,8 @@ export default function MailForm({ timeout }) {
                 transitionDuration: `${timeout}ms`
             }}
         >
-            <Input name='email' label={'Your email'} values={values}>
+            <Input name='email' label={'Your email'} values={values}
+                style={{ width: 'fit-content' }}>
                 <input type="email" name="email" className='form__input' />
             </Input>
             <Input name='message' label='Your message' values={values} big>
@@ -44,9 +45,11 @@ export default function MailForm({ timeout }) {
     )
 }
 
-const Input = ({ children, name, label, values, big }) => {
+const Input = ({ children, name, label, values, big, ...rest }) => {
     return (
-        <div className={`form__input-container ${values[name] ? "form__input-container--filled" : ""}`}>
+        <div className={`form__input-container ${values[name] ? "form__input-container--filled" : ""}`}
+            {...rest}
+        >
             <label htmlFor={name}>{label}</label>
             {children}
             <Shadow className='form__input-shadow' big={big} />
