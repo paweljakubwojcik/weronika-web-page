@@ -44,23 +44,26 @@ export default function MailForm({ timeout }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        let data = values
+        let { name, email, message } = values
 
-        setFetchState(prev => { return { ...prev, state: fetchStates.LOADING } })
-
-        fetch(`${cmsUrl}/emails`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then(data => data.json())
-            .then(() => {
-                setFetchState(prev => { return { ...prev, state: fetchStates.SENT } })
-                setValues({})
+        if (name && email && message) {
+            setFetchState(prev => { return { ...prev, state: fetchStates.LOADING } })
+            fetch(`${cmsUrl}/emails`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values),
             })
-            .catch(e => () => setFetchState(prev => { return { ...prev, error: e } }))
+                .then(data => data.json())
+                .then(() => {
+                    setFetchState(prev => { return { ...prev, state: fetchStates.SENT } })
+                })
+                .catch(e => () => setFetchState(prev => { return { ...prev, error: e } }))
+        }
+        else {
+            setFetchState(prev => { return { ...prev, error: 'please fill up all inputs' } })
+        }
     }
 
 
@@ -88,8 +91,10 @@ export default function MailForm({ timeout }) {
                             <Input name='message' label='Your message' values={values} big>
                                 <textarea name="message" id="message" className='form__input form__textarea'></textarea>
                             </Input>
+                            {fetchState.error && <p className='error-message'>{fetchState.error}</p>}
                             <Button className='form__button' as='button' role='submit'>Send</Button>
-                        </form>}
+                        </form>
+                    }
 
                     {fetchState.state === fetchStates.LOADING && <Delivery />}
                     {fetchState.state === fetchStates.SENT && <MessageSent />}
