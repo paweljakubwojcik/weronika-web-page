@@ -3,6 +3,7 @@ module.exports = {
     title: `Weronika Wójcik Interior Design`,
     description: `Searching for a bathroom design? I\'m an interior designer eager to help you with all stylistic choces and materials`,
     author: `Me, the developer <pawel.jakub.wojcik@gmail.com>`,
+    cmsUrl: "https://cms-strapi-weronika-wojcik.herokuapp.com",
   },
   plugins: [
     `gatsby-plugin-sass`,

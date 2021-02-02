@@ -1,12 +1,12 @@
 const fetch = require('node-fetch');
 
-const CMS_BASE_URL = 'https://cms-strapi-weronika-wojcik.herokuapp.com'
+const { siteMetadata: { cmsUrl: CMS_URL } } = require('./gatsby-config')
 
 exports.getDataFromCMS = async () => {
 
     const data = await Promise.all([
-        await (await fetch(`${CMS_BASE_URL}/projects`)).json(),
-        await (await fetch(`${CMS_BASE_URL}/360-pics`)).json()
+        await (await fetch(`${CMS_URL}/projects`)).json(),
+        await (await fetch(`${CMS_URL}/360-pics`)).json()
     ])
 
     return {
