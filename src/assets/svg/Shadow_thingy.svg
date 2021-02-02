@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 358.564 79.612" preserveAspectRatio='true'>
+<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 358.564 79.612" preserveAspectRatio="none">
     <path
+    preserveAspectRatio="none"
         d="M350.054-10.891c14.092,47.092,0,60.874,0,69.6,0,9.166-77.21,0-172.974,0-41.849,0-135.734,2.42-166.419,0-29.046-2.291,0-74.335,0-75.538C82.4-14.781,318.353-15.671,350.054-10.891Z"
         transform="translate(2.247 16.828)" fill="currentColor" />
 </svg>

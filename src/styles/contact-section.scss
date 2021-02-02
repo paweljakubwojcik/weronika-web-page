@@ -37,7 +37,7 @@
     @include breakpoint-down(medium) {
         width: 100%;
         max-width: 500px;
-        margin:1em 0;
+        margin: 1em 0;
     }
 
     &__button {
@@ -99,6 +99,11 @@
     width: 100%;
     max-width: 500px;
     padding: 0 1em;
+
+    &--loading {
+        filter: opacity(0);
+        pointer-events: none;
+    }
 
     &__input-container {
         position: relative;

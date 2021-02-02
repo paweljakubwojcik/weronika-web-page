@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { TransitionGroup, CSSTransition, SwitchTransition } from 'react-transition-group'
+import { CSSTransition, SwitchTransition } from 'react-transition-group'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
