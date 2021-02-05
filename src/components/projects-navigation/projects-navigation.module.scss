@@ -14,21 +14,25 @@
     display: flex;
     align-items: center;
 
-    transition: opacity .5s .3s;
+    transition: opacity 0.5s 0.3s;
 }
 
-.container.hidden{
-    opacity:0;
+.container.hidden {
+    opacity: 0;
     & > :nth-child(n) {
         pointer-events: none;
     }
 }
 
+$button-size: 3rem;
+$half-button-size: 1.5rem;
+$button-margin: 0.3em;
+
 .button {
     font-size: 1.5em;
-    width: 3rem;
-    height: 3rem;
-    margin: .3em;
+    width: $button-size;
+    height: $button-size;
+    margin: $button-margin;
 
     display: flex;
     align-items: center;
@@ -46,10 +50,52 @@
     }
 }
 
-.button-container{
+.button-container {
     display: flex;
     align-items: center;
     justify-content: center;
 
     margin-bottom: 4em;
+}
+
+.info-container {
+    position: relative;
+}
+
+.info-container.closed {
+    .info {
+        pointer-events: none;
+        opacity: 0;
+        clip-path: circle(1.5rem at calc(100% - calc(1.5rem + 0.3em)) calc(100% - calc(1.5rem + 0.3em)));
+        transition: opacity 0.1s 0.4s, clip-path 0.4s;
+    }
+}
+
+.info-container.open {
+    .info {
+        opacity: 1;
+        clip-path: circle(100% at 50% 50%);
+        transition: opacity 0.1s, clip-path 0.4s 0.1s;
+    }
+}
+
+.info {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+
+    padding: 2em;
+    margin: 0;
+    text-align: justify;
+    font-size: 1.4em;
+
+    width: 600px;
+    max-width: 80vw;
+    border-radius: 1em;
+
+    background-color: var(--background-color);
+    cursor: pointer;
+
+    transition: opacity 0.4s, clip-path 0.4s;
 }

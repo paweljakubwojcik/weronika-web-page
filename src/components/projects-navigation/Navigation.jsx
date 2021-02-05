@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, navigate } from 'gatsby'
 
 import style from './projects-navigation.module.scss'
@@ -51,9 +51,7 @@ export default function Navigation({ state, next, previous, info, visible }) {
                 </Link>}
 
             <div className={style.buttonContainer} style={{ right: 0, bottom: 0 }} >
-                <button className={style.button}>
-                    <FontAwesomeIcon icon={faInfo} />
-                </button>
+                {info && <InfoButton info={info} />}
                 {modal ?
                     <button onClick={() => window.history.back()} className={style.button}>
                         <FontAwesomeIcon icon={faTimes} />
@@ -67,4 +65,25 @@ export default function Navigation({ state, next, previous, info, visible }) {
 
         </div>
     )
+}
+
+const InfoButton = ({ info }) => {
+    console.log(info)
+    const [isOpen, setOpen] = useState(false)
+
+    const handleClick = (e) => {
+        e.target.blur()
+        setOpen(prev => !prev)
+    }
+
+    return (
+        <div className={style.infoContainer + ' ' + (isOpen ? style.open : style.closed)}>
+            <button className={style.button} onClick={handleClick}>
+                <FontAwesomeIcon icon={faInfo} />
+            </button>
+
+            <p className={style.info} onClick={handleClick}>
+                {info}
+            </p>
+        </div >)
 }

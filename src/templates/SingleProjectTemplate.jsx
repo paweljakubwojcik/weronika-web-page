@@ -6,9 +6,10 @@ import PanoramicView from '../components/panoramic-view/PanoramicView'
 import ProgressiveImage from 'react-progressive-image'
 
 export default function Project({ location, pageContext }) {
+  console.log(pageContext)
 
   const { name, nextUrl, previousUrl, data } = pageContext
-  const { thumbnail, medium, small, full, width, height, panoramic: isPanoramic } = data
+  const { thumbnail, medium, small, full, width, height, panoramic: isPanoramic, description } = data
 
   const backgroundURL = thumbnail || small || medium
 
@@ -48,7 +49,7 @@ export default function Project({ location, pageContext }) {
           }
 
         </div>
-        <Navigation visible={navVisibility} state={location?.state} next={nextUrl} previous={previousUrl} />
+        <Navigation visible={navVisibility} state={location?.state} next={nextUrl} previous={previousUrl} info={description} />
       </Layout>
     </div >
   )
