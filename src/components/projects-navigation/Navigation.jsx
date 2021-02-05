@@ -67,14 +67,28 @@ export default function Navigation({ state, next, previous, info, visible }) {
     )
 }
 
+
 const InfoButton = ({ info }) => {
-    console.log(info)
     const [isOpen, setOpen] = useState(false)
+    const [descriptionDOM, setDescriptionDOM] = useState(false)
 
     const handleClick = (e) => {
         e.target.blur()
         setOpen(prev => !prev)
     }
+
+    useEffect(() => {
+        if (descriptionDOM) {
+            const info = descriptionDOM.innerHTML
+            const formatedInfo = info.replace(/\*{2}.+\*{2}/g, '<strong>$&</strong>')
+                .replace(/\*{2}/g, '')
+                .replace(/\*{1}.+\*{1}/g, '<i>$&</i>')
+                .replace(/\*{1}/g, '')
+            descriptionDOM.innerHTML = formatedInfo
+        }
+
+    }, [descriptionDOM])
+
 
     return (
         <div className={style.infoContainer + ' ' + (isOpen ? style.open : style.closed)}>
@@ -82,7 +96,7 @@ const InfoButton = ({ info }) => {
                 <FontAwesomeIcon icon={faInfo} />
             </button>
 
-            <p className={style.info} onClick={handleClick}>
+            <p className={style.info} onClick={handleClick} ref={setDescriptionDOM}>
                 {info}
             </p>
         </div >)

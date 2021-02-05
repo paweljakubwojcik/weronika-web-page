@@ -89,12 +89,14 @@ $button-margin: 0.3em;
     margin: 0;
     text-align: justify;
     font-size: 1.4em;
+    white-space: pre-wrap;
 
-    width: 600px;
+    width: max-content;
     max-width: 80vw;
     border-radius: 1em;
 
     background-color: var(--background-color);
+    box-shadow: var(--shadow);
     cursor: pointer;
 
     transition: opacity 0.4s, clip-path 0.4s;
