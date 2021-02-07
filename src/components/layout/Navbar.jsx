@@ -9,15 +9,15 @@ const links = [
         element: '#home'
     },
     {
-        name: 'Projects',
-        url: '/projects'
-    },
-    {
         name: 'About',
         url: '/#about',
         element: '#about'
     },
-
+    {
+        name: 'Projects',
+        url: '/#projects',
+        element: '#projects'
+    },
     {
         name: 'Contact',
         url: '/#contact',

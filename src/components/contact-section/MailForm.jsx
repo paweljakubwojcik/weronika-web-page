@@ -80,12 +80,10 @@ export default function MailForm({ timeout }) {
                                 transitionDuration: `${timeout}ms`
                             }}
                         >
-                            <Input name='name' label={'Your name'} values={values}
-                                style={{ width: 'fit-content', width: '-moz-fit-content' }}>
+                            <Input name='name' label={'Your name'} values={values} >
                                 <input type="input" name="name" className='form__input' />
                             </Input>
-                            <Input name='email' label={'Your email'} values={values}
-                                style={{ width: 'fit-content', width: '-moz-fit-content' }}>
+                            <Input name='email' label={'Your email'} values={values}>
                                 <input type="email" name="email" className='form__input' />
                             </Input>
                             <Input name='message' label='Your message' values={values} big>
@@ -104,10 +102,10 @@ export default function MailForm({ timeout }) {
     )
 }
 
-const Input = ({ children, name, label, values, big, ...rest }) => {
+const Input = ({ children, name, label, values, big, className, ...rest }) => {
     return (
         <div
-            className={`form__input-container ${values[name] ? "form__input-container--filled" : ""}`}
+            className={`form__input-container ${big ? 'form__input-container--wide' : ''} ${values[name] ? "form__input-container--filled" : ""}`}
             {...rest}
         >
             <label htmlFor={name}>{label}</label>
