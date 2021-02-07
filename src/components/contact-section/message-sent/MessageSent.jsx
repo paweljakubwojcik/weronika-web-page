@@ -4,9 +4,9 @@ export default () => {
     return (
         <div>
             <h3>
-                Message sent
+                Wiadomość wysłana
             </h3>
-            <p>Thank you!</p>
+            <p>Dziękuje!</p>
         </div>
     )
 }

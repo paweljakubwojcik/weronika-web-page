@@ -4,22 +4,22 @@ import Button from '../button/Button'
 
 const links = [
     {
-        name: 'Home',
+        name: '',
         url: '/',
         element: '#home'
     },
     {
-        name: 'About',
+        name: 'O mnie',
         url: '/#about',
         element: '#about'
     },
     {
-        name: 'Projects',
+        name: 'Projekty',
         url: '/#projects',
         element: '#projects'
     },
     {
-        name: 'Contact',
+        name: 'Kontakt',
         url: '/#contact',
         element: '#contact'
     },

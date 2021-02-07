@@ -7,7 +7,7 @@ export default function PhoneNumber({ timeout }) {
 
     return (
         <div className='phone-number__container'>
-            <label>Click to call</label>
+            <label>Kliknij aby zadzwonić</label>
             <a href={`tel:${number}`} className='phone-number'>
                 {number.split('').map((digit, i) =>
                     <span key={i} style={{

@@ -62,7 +62,7 @@ export default function MailForm({ timeout }) {
                 .catch(e => () => setFetchState(prev => { return { ...prev, error: e } }))
         }
         else {
-            setFetchState(prev => { return { ...prev, error: 'please fill up all inputs' } })
+            setFetchState(prev => { return { ...prev, error: 'proszę wypełnić wszystkie pola' } })
         }
     }
 
@@ -80,17 +80,17 @@ export default function MailForm({ timeout }) {
                                 transitionDuration: `${timeout}ms`
                             }}
                         >
-                            <Input name='name' label={'Your name'} values={values} >
+                            <Input name='name' label={'Twoje imię'} values={values} >
                                 <input type="input" name="name" className='form__input' />
                             </Input>
-                            <Input name='email' label={'Your email'} values={values}>
+                            <Input name='email' label={'Twój email'} values={values}>
                                 <input type="email" name="email" className='form__input' />
                             </Input>
-                            <Input name='message' label='Your message' values={values} big>
+                            <Input name='message' label='Wiadomość' values={values} big>
                                 <textarea name="message" id="message" className='form__input form__textarea'></textarea>
                             </Input>
                             {fetchState.error && <p className='error-message'>{fetchState.error}</p>}
-                            <Button className='form__button' as='button' role='submit'>Send</Button>
+                            <Button className='form__button' as='button' role='submit'>Wyślij</Button>
                         </form>
                     }
 
