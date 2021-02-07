@@ -46,6 +46,9 @@ h4 {
 a {
   text-decoration: none;
   color: inherit;
+  stroke: none;
+  border: none;
+  outline: none;
   &:hover {
     cursor: pointer;
   }

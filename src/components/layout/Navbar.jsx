@@ -86,7 +86,7 @@ const SideBar = () => {
                 <ul className="sidebar__links-list">
                     {links.map(link =>
                         <li className="sidebar__link-element" key={link.name}>
-                            <Button to={link.url}>{link.name}</Button>
+                            <Button to={link.url} onClick={() => setSideBarVis(visible => !visible)}>{link.name}</Button>
                         </li>
                     )}
                 </ul>
