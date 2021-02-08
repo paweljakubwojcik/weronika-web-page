@@ -43,6 +43,7 @@
   ],
   "license": "0BSD",
   "scripts": {
+    "preinstall":"gatsby clean",
     "build": "gatsby clean && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
