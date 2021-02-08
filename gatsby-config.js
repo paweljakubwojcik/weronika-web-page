@@ -1,7 +1,11 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 module.exports = {
   siteMetadata: {
     title: `Weronika Wójcik Interior Design`,
-    description: `Searching for a bathroom design? I\'m an interior designer eager to help you with all stylistic choces and materials`,
+    description: `Weronika Wójcik - dyplomowany projektant wnętrz z doświadczeniem i pasją. Zaprojektuje niepowtarzalne wnętrze twojej łazienki.`,
     author: `Me, the developer <pawel.jakub.wojcik@gmail.com>`,
     cmsUrl: "https://cms-strapi-weronika-wojcik.herokuapp.com",
   },
@@ -32,11 +36,11 @@ module.exports = {
         queryLimit: 100, // Default to 100
         contentTypes: [],
         //If using single types place them in this array.
-        singleTypes: [`hero-image`, `hero-description`, 'hero-projects'],
+        singleTypes: [`hero-image`, `hero-description`, 'hero-projects', 'personal-info'],
         // Possibility to login with a strapi user, when content types are not publically available (optional).
         loginData: {
-          identifier: "",
-          password: "",
+          identifier: `${process.env.STRAPI_ID}`,
+          password:`${process.env.STRAPI_PASS}`,
         },
       },
     },

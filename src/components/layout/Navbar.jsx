@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from "gatsby"
 import Button from '../button/Button'
+import { scrollTo } from '../../util/methods'
 
 const links = [
     {
@@ -25,6 +26,8 @@ const links = [
     },
 ]
 
+
+
 export default function Navbar() {
 
 
@@ -38,7 +41,6 @@ export default function Navbar() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    console.log(entry)
                     const url = entry.target.id === 'home' ? '/' : '/#' + entry.target.id
                     setActive(url)
                     window.history.replaceState(null, null, url)
@@ -58,25 +60,32 @@ export default function Navbar() {
         
     }, [])
 
+    const handleClick = (e, elementID, url) => {
+        setActive(url)
+        if (scrollTo(elementID))
+            e.preventDefault()
+    }
+
 
     return (
         <>
             <div className="navbar">
                 <ul className="links">
                     {links.map(link =>
-                        <li className={`links__link-element ${link.url === active ? 'links__link-element--active' : ''}`} key={link.name}>
-                            <Link to={link.url} onClick={() => setActive(link.url)}>{link.name}</Link>
+                        link.name.length !== 0 && <li className={`links__link-element ${link.url === active ? 'links__link-element--active' : ''}`} key={link.name}>
+                            <Link to={link.url} onClick={(e) => handleClick(e, link.element, link.url)}>{link.name}</Link>
                         </li>
                     )}
                 </ul>
-                <SideBar />
+                <SideBar handleClick={handleClick} />
             </div>
         </>
     )
 }
 
-const SideBar = () => {
+const SideBar = ({ handleClick }) => {
     const [visible, setSideBarVis] = useState(false)
+
     return (
         <>
             <button
@@ -89,8 +98,15 @@ const SideBar = () => {
             <aside className={`sidebar ${visible ? 'sidebar--visible' : ''}`}>
                 <ul className="sidebar__links-list">
                     {links.map(link =>
-                        <li className="sidebar__link-element" key={link.name}>
-                            <Button to={link.url} onClick={() => setSideBarVis(visible => !visible)}>{link.name}</Button>
+                        link.name.length !== 0 && <li className="sidebar__link-element" key={link.name}>
+                            <Button
+                                to={link.url}
+                                onClick={(e) => {
+                                    handleClick(e, link.element, link.url)
+                                    setSideBarVis(visible => !visible)
+                                }}>
+                                {link.name}
+                            </Button>
                         </li>
                     )}
                 </ul>

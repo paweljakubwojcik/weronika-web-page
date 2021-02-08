@@ -1,9 +1,17 @@
 import React from 'react'
+import { useStaticQuery, graphql } from "gatsby"
+
 
 export default function PhoneNumber({ timeout }) {
 
-    //TODO: fetch this from strapi
-    const number = '999243111'
+    
+    const { strapiPersonalInfo: { telefon: number } } = useStaticQuery(graphql`
+            query Phone {
+                strapiPersonalInfo {
+                    telefon
+            }
+        }
+   `)
 
     return (
         <div className='phone-number__container'>

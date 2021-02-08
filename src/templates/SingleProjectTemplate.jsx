@@ -8,7 +8,7 @@ import ProgressiveImage from 'react-progressive-image'
 export default function Project({ location, pageContext }) {
 
   const { name, nextUrl, previousUrl, data } = pageContext
-  const { thumbnail, medium, small, full, width, height, panoramic: isPanoramic, description } = data
+  const { thumbnail, medium, small, full, width, height, panoramic: isPanoramic, description, keywords } = data
 
   const backgroundURL = thumbnail || small || medium
 
@@ -34,7 +34,7 @@ export default function Project({ location, pageContext }) {
 
 
       <Layout nonColor={true} title={name} filled={true}>
-        <SEO title={name} />
+        <SEO title={name} description={name + (keywords ? keywords : " ") + (description ? description : " ")} />
         <div className="project-container">
           {isPanoramic ?
             (

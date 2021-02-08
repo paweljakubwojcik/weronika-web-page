@@ -28,7 +28,10 @@ const Header = ({ title, filled }) => {
       <header className='main-header'>
         <div className="main-header__title-container">
           <h1 className='main-header__title'>
-            <Link to='/' >
+            <Link to='/' onClick={() => window.scroll({
+              top: 0,
+              behavior: 'smooth'
+            })}>
               Weronika Wójcik
             </Link>
           </h1>
