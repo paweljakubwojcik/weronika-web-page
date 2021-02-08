@@ -4,22 +4,22 @@ import Button from '../button/Button'
 
 const links = [
     {
-        name: 'Home',
+        name: '',
         url: '/',
         element: '#home'
     },
     {
-        name: 'Projects',
-        url: '/projects'
-    },
-    {
-        name: 'About',
+        name: 'O mnie',
         url: '/#about',
         element: '#about'
     },
-
     {
-        name: 'Contact',
+        name: 'Projekty',
+        url: '/#projects',
+        element: '#projects'
+    },
+    {
+        name: 'Kontakt',
         url: '/#contact',
         element: '#contact'
     },
@@ -86,7 +86,7 @@ const SideBar = () => {
                 <ul className="sidebar__links-list">
                     {links.map(link =>
                         <li className="sidebar__link-element" key={link.name}>
-                            <Button to={link.url}>{link.name}</Button>
+                            <Button to={link.url} onClick={() => setSideBarVis(visible => !visible)}>{link.name}</Button>
                         </li>
                     )}
                 </ul>

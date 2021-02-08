@@ -22,16 +22,16 @@ const IndexPage = () => (
       <HeroBackground />
 
       <header className='hero-section__header'>
-        <h2>Let's create <br /> something <br /> <Akcent style={ { fontSize: "1.3em" } }> beautifull</Akcent></h2>
-        <Button className="hero-section__button" to='/projects'> See my work </Button>
-        <Button className="hero-section__button" to='/#contact'> Contact me </Button>
+        <h2>Czas stworzyć coś <br /> <Akcent style={ { fontSize: "1.3em" } }> niesamowitego </Akcent></h2>
+        <Button className="hero-section__button" to='/projects'> Portfolio </Button>
+        <Button className="hero-section__button" to='/#contact'> Kontakt </Button>
       </header>
 
     </section>
 
     <section id='about' className='section about-section'>
       <header className='about-section__header'>
-        <h2> <Akcent>Who</Akcent> am I ? </h2>
+        <h2> <Akcent>Kim</Akcent> jestem ? </h2>
       </header>
 
       <HeroImage />
@@ -45,8 +45,8 @@ const IndexPage = () => (
     <section id='projects' className='section projects-section'>
       <header className='section__header'>
         <h2>
-          My
-                <Akcent> Work</Akcent>
+         Moje
+                <Akcent> Projekty</Akcent>
         </h2>
       </header>
 
@@ -54,13 +54,13 @@ const IndexPage = () => (
 
       <PreviewGrid />
 
-      <Button className='projects-section__button' to='/projects'> More projects </Button>
+      <Button className='projects-section__button' to='/projects'> Więcej projektów </Button>
     </section>
 
     <section id='contact' className='section contact-section'>
       <header className='section__header'>
         <h2>
-          Get in <Akcent>touch</Akcent>
+          <Akcent>Skontaktuj </Akcent>się ze mną
         </h2>
       </header>
 

@@ -10,12 +10,12 @@
     margin: 2em 0 0 0;
     padding: 0 1em;
 
-    transition: background-color .3s, font-size .3s;
+    transition: background-color 0.3s, font-size 0.3s;
 
     &.container--filled {
         background-color: var(--sidebar-color);
         // box-shadow: var(--shadow);
-        font-size: .9em;
+        font-size: 0.9em;
     }
 }
 
@@ -52,10 +52,12 @@
 
     &__sub-title {
         display: flex;
-        position: relative;
-        justify-content: end;
+        /* position: relative;
+        
         right: 0;
-        top: 100%;
+        top: 100%; */
+        text-align: right;
+        justify-content: flex-end;
         padding: 0.4em 0;
 
         font-size: 0.8em;
@@ -82,7 +84,9 @@ $break-point: 800px;
 .navbar {
     &__ham-btn {
         background-color: transparent;
-        position: relative;
+        position: absolute;
+        top: 0.5em;
+        right: 1em;
         z-index: 101;
         display: flex;
         flex-direction: column;
