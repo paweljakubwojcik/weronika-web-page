@@ -27,10 +27,13 @@ const links = [
 
 export default function Navbar() {
 
-    const { pathname, hash } = window.location
-    const [active, setActive] = useState(pathname + hash)
+
+    const [active, setActive] = useState(null)
 
     useEffect(() => {
+
+        const { pathname, hash } = window?.location
+        setActive(pathname + hash)
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -52,6 +55,7 @@ export default function Navbar() {
                 observer.observe(target)
 
         })
+        
     }, [])
 
 

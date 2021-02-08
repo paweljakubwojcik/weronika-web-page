@@ -15,7 +15,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 
 const fov = 80
-const aspectRatio = window?.innerWidth / window?.innerHeight;
+const aspectRatio = typeof window !== `undefined` ? window.innerWidth / window.innerHeight : undefined;
 const near = 0.1
 const far = 300000
 
@@ -27,11 +27,9 @@ const controlsMinDistance = 1000;
 
 export default function PanoramicView({ data, setNavVisibility }) {
 
-    const scene = useMemo(() => new Scene(), [])
-    const camera = useMemo(() => new PerspectiveCamera(fov, aspectRatio, near, far), []);
-    const renderer = useMemo(() => new WebGLRenderer(), []);
-
-    
+    const scene = typeof window !== `undefined` ? useMemo(() => new Scene(), []) : null
+    const camera = typeof window !== `undefined` ? useMemo(() => new PerspectiveCamera(fov, aspectRatio, near, far), []) : null
+    const renderer = typeof window !== `undefined` ? useMemo(() => new WebGLRenderer(), []) : null
 
     function render() {
         requestAnimationFrame(() => renderer.render(scene, camera));
@@ -45,7 +43,6 @@ export default function PanoramicView({ data, setNavVisibility }) {
     }
 
     const [canvas, setCanvas] = useState(null)
-
     const [visible, setVisible] = useState(false)
 
     useEffect(() => {

@@ -6,7 +6,6 @@ import PanoramicView from '../components/panoramic-view/PanoramicView'
 import ProgressiveImage from 'react-progressive-image'
 
 export default function Project({ location, pageContext }) {
-  console.log(pageContext)
 
   const { name, nextUrl, previousUrl, data } = pageContext
   const { thumbnail, medium, small, full, width, height, panoramic: isPanoramic, description } = data
@@ -16,13 +15,16 @@ export default function Project({ location, pageContext }) {
   const [navVisibility, setNavVisibility] = useState(true)
 
   const loadingDimensions = { width, height }
-  if (height > window.innerHeight) {
-    loadingDimensions.height = window.innerHeight
-    loadingDimensions.width = window.innerHeight * width / height
-  }
-  if (width > window.innerWidth) {
-    loadingDimensions.height = window.innerHeight * height / width
-    loadingDimensions.width = window.innerWidth
+
+  if (typeof window !== `undefined`) {
+    if (height > window?.innerHeight) {
+      loadingDimensions.height = window?.innerHeight
+      loadingDimensions.width = window?.innerHeight * width / height
+    }
+    if (width > window?.innerWidth) {
+      loadingDimensions.height = window?.innerHeight * height / width
+      loadingDimensions.width = window?.innerWidth
+    }
   }
 
 

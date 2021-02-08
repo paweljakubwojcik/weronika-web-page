@@ -36,7 +36,7 @@ const Grid = (props) => {
         props.pageContext.pageImages.forEach(item => items.push(<GridItem item={item} key={"gi" + (i++)} />))
     }
 
-    console.log("Rendering " + i + " gridItems.")
+    //console.log("Rendering " + i + " gridItems.")
 
     const pics360 = items.filter(node => node.props.item.data.panoramic)
     const projects = items.filter(node => !node.props.item.data.panoramic)
