@@ -1,6 +1,6 @@
 .hero-section {
     position: relative;
-    
+
     &__header {
         position: absolute;
         top: 50%;
@@ -11,11 +11,15 @@
 
         h2 {
             margin: 1em 0;
+            text-align: justify;
             text-shadow: var(--shadow);
         }
 
-        @media (max-width: 800px) {
+        @include breakpoint-down(medium) {
             font-size: 22px;
+        }
+
+        @include breakpoint-down(small) {
             right: 50%;
         }
     }
@@ -43,8 +47,7 @@
     overflow: hidden;
     z-index: -1;
 
-
-    @media (max-width: 700px) {
+    @include breakpoint-down(small) {
         transform: translateX(-65%);
     }
 }

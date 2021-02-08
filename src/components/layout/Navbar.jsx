@@ -38,7 +38,6 @@ export default function Navbar() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    console.log(entry)
                     const url = entry.target.id === 'home' ? '/' : '/#' + entry.target.id
                     setActive(url)
                     window.history.replaceState(null, null, url)

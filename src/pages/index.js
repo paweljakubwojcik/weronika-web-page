@@ -22,7 +22,7 @@ const IndexPage = () => (
       <HeroBackground />
 
       <header className='hero-section__header'>
-        <h2>Czas stworzyć coś <br /> <Akcent style={ { fontSize: "1.3em" } }> niesamowitego </Akcent></h2>
+        <h2>Stwórzmy <br /> razem coś <br /><Akcent style={ { fontSize: "1.3em" } }> pięknego </Akcent></h2>
         <Button className="hero-section__button" to='/projects'> Portfolio </Button>
         <Button className="hero-section__button" to='/#contact'> Kontakt </Button>
       </header>
@@ -45,7 +45,7 @@ const IndexPage = () => (
     <section id='projects' className='section projects-section'>
       <header className='section__header'>
         <h2>
-         Moje
+        Moje
                 <Akcent> Projekty</Akcent>
         </h2>
       </header>
@@ -67,7 +67,7 @@ const IndexPage = () => (
       <ContactSection />
 
     </section>
-  </Layout>
+  </Layout >
 )
 
 export default IndexPage

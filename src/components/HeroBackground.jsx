@@ -23,7 +23,7 @@ export default function HeroImage() {
   const [setRef, visible] = useIntersectionObserver({
     threshold: new Array(100).fill(0).map((e, i) => i / 100)
   }, (e) => {
-    const parallax = - e.boundingClientRect.y / 5
+    const parallax = - e.boundingClientRect.y / 2.5
     setParallax(parallax)
   })
 
