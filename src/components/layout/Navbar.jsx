@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from "gatsby"
 import Button from '../button/Button'
+import { scrollTo } from '../../util/methods'
 
 const links = [
     {
@@ -24,6 +25,8 @@ const links = [
         element: '#contact'
     },
 ]
+
+
 
 export default function Navbar() {
 
@@ -54,6 +57,12 @@ export default function Navbar() {
         })
     }, [])
 
+    const handleClick = (e, elementID, url) => {
+        setActive(url)
+        if (scrollTo(elementID))
+            e.preventDefault()
+    }
+
 
     return (
         <>
@@ -61,18 +70,19 @@ export default function Navbar() {
                 <ul className="links">
                     {links.map(link =>
                         link.name.length !== 0 && <li className={`links__link-element ${link.url === active ? 'links__link-element--active' : ''}`} key={link.name}>
-                            <Link to={link.url} onClick={() => setActive(link.url)}>{link.name}</Link>
+                            <Link to={link.url} onClick={(e) => handleClick(e, link.element, link.url)}>{link.name}</Link>
                         </li>
                     )}
                 </ul>
-                <SideBar />
+                <SideBar handleClick={handleClick} />
             </div>
         </>
     )
 }
 
-const SideBar = () => {
+const SideBar = ({ handleClick }) => {
     const [visible, setSideBarVis] = useState(false)
+
     return (
         <>
             <button
@@ -86,7 +96,14 @@ const SideBar = () => {
                 <ul className="sidebar__links-list">
                     {links.map(link =>
                         link.name.length !== 0 && <li className="sidebar__link-element" key={link.name}>
-                            <Button to={link.url} onClick={() => setSideBarVis(visible => !visible)}>{link.name}</Button>
+                            <Button
+                                to={link.url}
+                                onClick={(e) => {
+                                    handleClick(e, link.element, link.url)
+                                    setSideBarVis(visible => !visible)
+                                }}>
+                                {link.name}
+                            </Button>
                         </li>
                     )}
                 </ul>
