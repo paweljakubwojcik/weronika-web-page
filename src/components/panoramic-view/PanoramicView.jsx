@@ -27,9 +27,9 @@ const controlsMinDistance = 1000;
 
 export default function PanoramicView({ data, setNavVisibility }) {
 
-    const scene = typeof window !== `undefined` ? useMemo(() => new Scene(), []) : null
-    const camera = typeof window !== `undefined` ? useMemo(() => new PerspectiveCamera(fov, aspectRatio, near, far), []) : null
-    const renderer = typeof window !== `undefined` ? useMemo(() => new WebGLRenderer(), []) : null
+    const scene = useMemo(() => typeof window !== `undefined` ? new Scene() : null, [])
+    const camera = useMemo(() => typeof window !== `undefined` ? new PerspectiveCamera(fov, aspectRatio, near, far) : null, [])
+    const renderer = useMemo(() => typeof window !== `undefined` ? new WebGLRenderer() : null, [])
 
     function render() {
         requestAnimationFrame(() => renderer.render(scene, camera));
