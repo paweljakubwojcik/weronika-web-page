@@ -115,8 +115,8 @@ exports.createPages = async ({ actions }) => {
                 component: singleItemTemplatePage,
                 context: {
                     url: `/${basePath}/${name}`,
-                    previousUrl: `/${basePath}/${previous}`,
-                    nextUrl: `/${basePath}/${next}`,
+                    previousUrl: previous ? `/${basePath}/${previous}` : undefined,
+                    nextUrl: next ? `/${basePath}/${next}` : undefined,
                     ...picData,
                 }
             }
