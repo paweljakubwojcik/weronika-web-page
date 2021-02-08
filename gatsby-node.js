@@ -22,11 +22,12 @@ exports.createPages = async ({ actions }) => {
         const allPics = []
         result.pic360.forEach((node, i) => {
 
-            const { name, description, img } = node
+            const { name, description, img, keywords } = node
 
             allPics.push({
                 name: `${name}`,
                 data: {
+                    keywords,
                     description,
                     full: img.url,
                     medium: img.formats.medium?.url,
@@ -43,7 +44,7 @@ exports.createPages = async ({ actions }) => {
 
         //adding every picture as separate node
         result.projects.forEach((project) => {
-            const { name, img, description } = project
+            const { name, img, description, keywords } = project
 
             img.forEach((node, index) => {
                 const { url, formats, width, height } = node
@@ -52,6 +53,7 @@ exports.createPages = async ({ actions }) => {
                 allPics.push({
                     name: `${name}-${index + 1}`,
                     data: {
+                        keywords,
                         description,
                         full: url,
                         medium: medium?.url,
