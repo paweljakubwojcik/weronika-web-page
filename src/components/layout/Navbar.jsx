@@ -60,7 +60,7 @@ export default function Navbar() {
             <div className="navbar">
                 <ul className="links">
                     {links.map(link =>
-                        <li className={`links__link-element ${link.url === active ? 'links__link-element--active' : ''}`} key={link.name}>
+                        link.name.length !== 0 && <li className={`links__link-element ${link.url === active ? 'links__link-element--active' : ''}`} key={link.name}>
                             <Link to={link.url} onClick={() => setActive(link.url)}>{link.name}</Link>
                         </li>
                     )}
@@ -85,7 +85,7 @@ const SideBar = () => {
             <aside className={`sidebar ${visible ? 'sidebar--visible' : ''}`}>
                 <ul className="sidebar__links-list">
                     {links.map(link =>
-                        <li className="sidebar__link-element" key={link.name}>
+                        link.name.length !== 0 && <li className="sidebar__link-element" key={link.name}>
                             <Button to={link.url} onClick={() => setSideBarVis(visible => !visible)}>{link.name}</Button>
                         </li>
                     )}
