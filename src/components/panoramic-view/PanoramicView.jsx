@@ -15,7 +15,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 
 const fov = 80
-const aspectRatio = window.innerWidth / window.innerHeight;
+const aspectRatio = window?.innerWidth / window?.innerHeight;
 const near = 0.1
 const far = 300000
 
@@ -38,8 +38,8 @@ export default function PanoramicView({ data, setNavVisibility }) {
     }
 
     function resize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window?.innerWidth / window?.innerHeight;
+        renderer.setSize(window?.innerWidth, window?.innerHeight);
         camera.updateProjectionMatrix();
         render()
     }
@@ -61,7 +61,7 @@ export default function PanoramicView({ data, setNavVisibility }) {
             console.log('creating panoramic view')
 
             camera.position.set(...cameraInitialPosition);
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(window?.innerWidth, window?.innerHeight);
 
             let skySphereGeo = new SphereGeometry(100000, 100, 100);
             // texture loader is async, so it takes callback
