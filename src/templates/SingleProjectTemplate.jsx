@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
+import { graphql } from "gatsby"
+
 import Layout from '../components/layout/layout'
 import SEO from '../components/seo'
 import Navigation from '../components/projects-navigation/Navigation'
 import PanoramicView from '../components/panoramic-view/PanoramicView'
 import ProgressiveImage from 'react-progressive-image'
 
-export default function Project({ location, pageContext }) {
+export default function Project({ location, data: { strapiProjects: data }, pageContext }) {
 
-  const { name, nextUrl, previousUrl, data } = pageContext
-  const { thumbnail, medium, small, full, width, height, panoramic: isPanoramic, description, keywords } = data
+  console.log(data)
 
-  const backgroundURL = thumbnail || small || medium
+  const { name, nextUrl, previousUrl, index, panoramic: isPanoramic } = pageContext
+  const img = data.img[index]
+  const { formats: { thumbnail, medium, small }, url: full, width, height } = img
+  const { description, keywords } = data
+
+  const backgroundURL = thumbnail?.url || small?.url || medium?.url
 
   const [navVisibility, setNavVisibility] = useState(true)
 
@@ -31,7 +37,6 @@ export default function Project({ location, pageContext }) {
   return (
     <div style={{ overflow: 'hidden', width: '100vw', height: '100vh' }}>
       <img className="blur-background" src={backgroundURL} alt={name} onLoad={(e) => e.target.style.opacity = 1} />
-
 
       <Layout nonColor={true} title={name} filled={true}>
         <SEO title={name} description={name + (keywords ? keywords : " ") + (description ? description : " ")} />
@@ -56,5 +61,34 @@ export default function Project({ location, pageContext }) {
     </div >
   )
 }
+
+export const query = graphql`
+  query($project: String!) {
+    strapiProjects(name: {eq: $project}) {
+      name
+      description
+      keywords
+      img{
+          url
+          formats {
+            large {
+              url
+            }
+            medium {
+              url
+            }
+            small {
+              url
+            }
+            thumbnail {
+              url
+            }
+        }
+        height
+        width
+      }
+    }
+  }
+`
 
 

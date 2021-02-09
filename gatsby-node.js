@@ -97,7 +97,7 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
         `)
 
         const allPics = []
-        result.pics360.nodes.forEach((node, i) => {
+        /* result.pics360.nodes.forEach((node, i) => {
 
             const { name, description, img, keywords } = node
 
@@ -117,7 +117,7 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
             allPics[i].previous = allPics[i - 1]?.name
             if (allPics[i - 1]) allPics[i - 1].next = allPics[i].name
 
-        })
+        }) */
 
         //adding every picture as separate node
         result.projects.nodes.forEach((project) => {
@@ -129,6 +129,8 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
 
                 allPics.push({
                     name: `${name}-${index + 1}`,
+                    project: name,
+                    index,
                     data: {
                         keywords,
                         description,
@@ -185,12 +187,14 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
         const singleItemTemplatePage = path.resolve(`src/templates/SingleProjectTemplate.jsx`)
 
         allPics.forEach(picData => {
-            const { name, next, previous } = picData
+            const { name, next, previous, project, index } = picData
             const basePath = 'project'
             const pageData = {
                 path: `/${basePath}/${name}`,
                 component: singleItemTemplatePage,
                 context: {
+                    project: project,
+                    index,
                     url: `/${basePath}/${name}`,
                     previousUrl: previous ? `/${basePath}/${previous}` : undefined,
                     nextUrl: next ? `/${basePath}/${next}` : undefined,
