@@ -11,18 +11,18 @@ const links = [
     },
     {
         name: 'O mnie',
-        url: '/#about',
+        url: '/#About',
         element: '#about'
     },
     {
         name: 'Projekty',
-        url: '/#projects',
-        element: '#projects'
+        url: '/#projekty',
+        element: '#projekty'
     },
     {
         name: 'Kontakt',
-        url: '/#contact',
-        element: '#contact'
+        url: '/#kontakt',
+        element: '#kontakt'
     },
 ]
 
