@@ -126,7 +126,7 @@ exports.createPages = async ({ actions, graphql }) => {
         })
 
         console.log('Building paginated pages')
-        const paginatedPageTemplate = path.resolve(`src/templates/PaginatedPageTemplate.jsx`)
+        const paginatedPageTemplate = path.resolve(`src/templates/paginatedPageTemplate.jsx`)
 
         /* Iterate needed pages and create them. */
         const countImagesPerPage = 20
@@ -142,7 +142,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
             /* Combine all data needed to construct this page. */
             const pageData = {
-                path: `/projekty/${pathSuffix}`,
+                path: `/${basePath}/${pathSuffix}`,
                 component: paginatedPageTemplate,
                 context: {
                     pageImages: pageImages,
@@ -164,7 +164,6 @@ exports.createPages = async ({ actions, graphql }) => {
 
         allPics.forEach(picData => {
             const { name } = picData
-            const basePath = 'projekty'
             const pageData = {
                 path: `/${basePath}/${name}`,
                 component: singleItemTemplatePage,
