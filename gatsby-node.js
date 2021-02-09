@@ -38,7 +38,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     `)
 }
 
-exports.createPages = async ({ actions, graphql }) => {
+exports.createPagesStatefully = async ({ actions, graphql }) => {
     const { createPage } = actions
     const basePath = 'projekty'
 
