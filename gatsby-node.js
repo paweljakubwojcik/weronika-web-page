@@ -1,26 +1,103 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/node-apis/
- */
 
-// You can delete this file if you're not using it
-
-const { getDataFromCMS } = require('./loader')
 const path = require(`path`)
 const fs = require('fs');
 
+exports.createSchemaCustomization = ({ actions, schema }) => {
+    const { createTypes } = actions
+    createTypes(`
+        interface Entry {
+            keywords: String
+            name: String
+            description: String
+        }
+        type Strapi360Pics implements Node & Entry {
+            img : IMG   
+        }
+        type StrapiProjects implements Node & Entry {
+            img : [IMG]
+        }
+        type IMG{
+            formats: FORMATS
+            url: String
+            width: Int
+            height: Int
+        }
+        type FORMATS {
+            large: format
+            medium: format
+            small: format
+            thumbnail: format
+        }
+        type format {
+            url: String!
+        }
 
+        type StrapiHeroImage implements Node{
+            image: File
+        }
+    `)
+}
 
-exports.createPages = async ({ actions }) => {
+exports.createPages = async ({ actions, graphql }) => {
     const { createPage } = actions
 
     try {
 
-        const result = await getDataFromCMS()
+        const { data: result } = await graphql(`
+        
+            query DataQuery {
+                pics360:allStrapi360Pics {
+                    nodes {
+                        img {
+                            ...data
+                            url
+                            width
+                            height
+                        }
+                        name
+                        keywords
+                        description
+                    }
+                }
+
+                projects:allStrapiProjects {
+                    nodes {
+                        img {
+                            ...data
+                            url
+                            width
+                            height
+                        }
+                        name
+                        keywords
+                        description
+                    }
+                }
+            }
+
+            fragment data on IMG {
+                formats {
+                    large {
+                        url
+                    }
+                    medium {
+                        url
+                    }
+                    small {
+                        url
+                    }
+                    thumbnail {
+                        url
+                    }
+                }
+                height
+                url
+                width
+            }
+        `)
 
         const allPics = []
-        result.pic360.forEach((node, i) => {
+        result.pics360.nodes.forEach((node, i) => {
 
             const { name, description, img, keywords } = node
 
@@ -43,7 +120,7 @@ exports.createPages = async ({ actions }) => {
         })
 
         //adding every picture as separate node
-        result.projects.forEach((project) => {
+        result.projects.nodes.forEach((project) => {
             const { name, img, description, keywords } = project
 
             img.forEach((node, index) => {
