@@ -6,13 +6,11 @@ const Grid = (props) => {
     const g = props.globalState
     const currentPage = props.pageContext.currentPage
 
-    console.log('render')
-
     const items = []
     var i = 0, j = 0, numberOfItemsOnLatestPage = 0
     const js = !g.isInitializing()
     if (g.useInfiniteScroll && g["page" + currentPage]) {
-        for (var pageNum = currentPage; ; pageNum++) {
+        for (let pageNum = currentPage; ; pageNum++) {
             const key = "page" + pageNum
             if (g[key]) {
                 /* Add gridItems that we have received metadata for. */
@@ -36,12 +34,11 @@ const Grid = (props) => {
         props.pageContext.pageImages.forEach(item => items.push(<GridItem item={item} key={"gi" + (i++)} />))
     }
 
-    //console.log("Rendering " + i + " gridItems.")
+    console.log("Rendering " + i + " gridItems.")
 
-    const pics360 = items.filter(node => node.props.item.data.panoramic)
-    const projects = items.filter(node => !node.props.item.data.panoramic)
+    const pics360 = items.filter(node => node.props.item.panoramic)
+    const projects = items.filter(node => !node.props.item.panoramic)
 
-    console.log(items)
     return (
         <>
             {pics360 && <Section title={'Wizualizacje'}> {pics360}</Section>}

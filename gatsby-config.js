@@ -4,7 +4,7 @@ require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
-    title: `Weronika Wójcik Interior Design`,
+    title: `Weronika Wójcik`,
     description: `Weronika Wójcik - dyplomowany projektant wnętrz z doświadczeniem i pasją. Zaprojektuje niepowtarzalne wnętrze twojej łazienki.`,
     author: `Me, the developer <pawel.jakub.wojcik@gmail.com>`,
     cmsUrl: "https://cms-strapi-weronika-wojcik.herokuapp.com",

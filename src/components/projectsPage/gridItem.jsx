@@ -3,10 +3,15 @@ import { Link } from "gatsby"
 import Img from "gatsby-image"
 import ProgressiveImage from "react-progressive-image"
 
-const GridItem = ({ item, index }) => {
+const GridItem = ({
+    item,
+    index
+}) => {
 
-    const { data, name } = item
-    const { medium, small, thumbnail } = data
+    console.log(item)
+
+    const { formats, name, url } = item
+    const { medium, small, thumbnail } = formats
 
     const [error, setError] = useState(null)
 
@@ -26,8 +31,10 @@ const GridItem = ({ item, index }) => {
                     {(src, _loading, srcSetData) => (
                         <div className={`img-container ${_loading && !error ? 'loading' : ''}`} key={index}>
                             <Link
-                                to={`/project/${item.name}`}
-                                state={{ modal: true }}
+                                to={`${url}`}
+                                state={{
+                                    modal: true,
+                                }}
                             >
                                 <img
                                     className={`img-container__image `}

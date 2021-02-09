@@ -2,7 +2,7 @@
 const path = require(`path`)
 const fs = require('fs');
 
-exports.createSchemaCustomization = ({ actions, schema }) => {
+exports.createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions
     createTypes(`
         interface Entry {
@@ -38,8 +38,9 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
     `)
 }
 
-exports.createPagesStatefully = async ({ actions, graphql }) => {
+exports.createPages = async ({ actions, graphql }) => {
     const { createPage } = actions
+    const basePath = 'projekty'
 
     try {
 
@@ -50,13 +51,8 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
                     nodes {
                         img {
                             ...data
-                            url
-                            width
-                            height
                         }
                         name
-                        keywords
-                        description
                     }
                 }
 
@@ -64,22 +60,14 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
                     nodes {
                         img {
                             ...data
-                            url
-                            width
-                            height
                         }
                         name
-                        keywords
-                        description
                     }
                 }
             }
 
             fragment data on IMG {
                 formats {
-                    large {
-                        url
-                    }
                     medium {
                         url
                     }
@@ -90,66 +78,55 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
                         url
                     }
                 }
-                height
-                url
-                width
             }
         `)
 
         const allPics = []
-        /* result.pics360.nodes.forEach((node, i) => {
+        result.pics360.nodes.forEach((node) => {
 
-            const { name, description, img, keywords } = node
-
+            const { img: { formats }, name } = node
             allPics.push({
-                name: `${name}`,
-                data: {
-                    keywords,
-                    description,
-                    full: img.url,
-                    medium: img.formats.medium?.url,
-                    small: img.formats.small?.url,
-                    thumbnail: img.formats.thumbnail?.url,
-                    panoramic: true
-                }
-            })
-
-            allPics[i].previous = allPics[i - 1]?.name
-            if (allPics[i - 1]) allPics[i - 1].next = allPics[i].name
-
-        }) */
-
-        //adding every picture as separate node
-        result.projects.nodes.forEach((project) => {
-            const { name, img, description, keywords } = project
-
-            img.forEach((node, index) => {
-                const { url, formats, width, height } = node
-                const { medium, small, thumbnail } = formats
-
-                allPics.push({
-                    name: `${name}-${index + 1}`,
-                    project: name,
-                    index,
-                    data: {
-                        keywords,
-                        description,
-                        full: url,
-                        medium: medium?.url,
-                        small: small?.url,
-                        thumbnail: thumbnail?.url,
-                        width,
-                        height
-                    }
-                })
-                const i = allPics.length - 1
-                allPics[i].previous = allPics[i - 1]?.name
-                if (allPics[i - 1]) allPics[i - 1].next = allPics[i].name
+                name,
+                project: name,
+                formats: {
+                    medium: formats.medium?.url,
+                    small: formats.small?.url,
+                    thumbnail: formats.thumbnail?.url,
+                },
+                panoramic: true
             })
         })
 
+        //adding every picture as separate node
+        result.projects.nodes.forEach((project) => {
+            const { name, img } = project
+
+            img.forEach((node, index) => {
+                const { formats } = node
+                allPics.push({
+                    name: `${name} ${index + 1}`,
+                    project: name,
+                    index,
+                    formats: {
+                        medium: formats.medium?.url,
+                        small: formats.small?.url,
+                        thumbnail: formats.thumbnail?.url,
+                    },
+                })
+            })
+        })
+
+
+        allPics.forEach((pic, index) => {
+            pic.url = `/${basePath}/${pic.name}`
+            if (allPics[index - 1]) {
+                allPics[index - 1].nextURL = pic.url
+                pic.prevURL = allPics[index - 1].url
+            }
+        })
+
         console.log('Building paginated pages')
-        const paginatedPageTemplate = path.resolve(`src/templates/paginatedPageTemplate.jsx`)
+        const paginatedPageTemplate = path.resolve(`src/templates/PaginatedPageTemplate.jsx`)
 
         /* Iterate needed pages and create them. */
         const countImagesPerPage = 20
@@ -165,17 +142,16 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
 
             /* Combine all data needed to construct this page. */
             const pageData = {
-                path: `/projects/${pathSuffix}`,
+                path: `/projekty/${pathSuffix}`,
                 component: paginatedPageTemplate,
                 context: {
-                    /* If you need to pass additional data, you can pass it inside this context object. */
                     pageImages: pageImages,
                     currentPage: currentPage,
                     countPages: countPages
                 }
             }
 
-            /* Create normal pages (for pagination) and corresponding JSON (for infinite scroll). */
+            /* Create JSON (for infinite scroll) and page witgh first 20 items */
             createJSON(pageData)
             if (currentPage === 1)
                 createPage(pageData)
@@ -187,19 +163,12 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
         const singleItemTemplatePage = path.resolve(`src/templates/SingleProjectTemplate.jsx`)
 
         allPics.forEach(picData => {
-            const { name, next, previous, project, index } = picData
-            const basePath = 'project'
+            const { name } = picData
+            const basePath = 'projekty'
             const pageData = {
                 path: `/${basePath}/${name}`,
                 component: singleItemTemplatePage,
-                context: {
-                    project: project,
-                    index,
-                    url: `/${basePath}/${name}`,
-                    previousUrl: previous ? `/${basePath}/${previous}` : undefined,
-                    nextUrl: next ? `/${basePath}/${next}` : undefined,
-                    ...picData,
-                }
+                context: picData
             }
             createPage(pageData)
         })

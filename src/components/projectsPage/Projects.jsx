@@ -9,10 +9,10 @@ export default function Projects({ globalState, pageContext }) {
 
 
     useEffect(() => {
-        console.log("*** Constructing View ***")
+       /*  console.log("*** Constructing View ***") */
         if (globalState.isInitializing() || !globalState.useInfiniteScroll) {
             const pageKey = "page" + pageContext.currentPage
-            console.log(`View is initializing items according to ${pageKey}.`)
+            /* console.log(`View is initializing items according to ${pageKey}.`) */
             globalState.updateState({
                 [pageKey]: pageContext.pageImages,
                 cursor: pageContext.currentPage + 1
@@ -20,16 +20,10 @@ export default function Projects({ globalState, pageContext }) {
         }
     }, [])
 
-    const paginationData = {
-        currentPage: pageContext.currentPage,
-        countPages: pageContext.countPages,
-        useInfiniteScroll: globalState.useInfiniteScroll
-    }
-
     return (
         <>
-
             <BackgroundThing />
+            
             <article className='projekty-container'>
                 <InfiniteScroll
                     throttle={150}

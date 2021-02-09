@@ -17,14 +17,14 @@ import ContactSection from '../components/contact-section/ContactSection'
 
 const IndexPage = () => (
   <Layout >
-    <SEO title="Home" />
+    <SEO title='Interior Design'/>
     <section id='home' className='section hero-section'>
       <HeroBackground />
 
       <header className='hero-section__header'>
         <h2>Stwórzmy <br /> razem coś <br /><Akcent style={ { fontSize: "1.3em" } }> pięknego </Akcent></h2>
-        <Button className="hero-section__button" to='/projects'> Portfolio </Button>
-        <Button className="hero-section__button" to='/#contact'> Kontakt </Button>
+        <Button className="hero-section__button" to='/projekty'> Portfolio </Button>
+        <Button className="hero-section__button" to='/#kontakt'> Kontakt </Button>
       </header>
 
     </section>
@@ -42,7 +42,7 @@ const IndexPage = () => (
 
     </section>
 
-    <section id='projects' className='section projects-section'>
+    <section id='projekty' className='section projects-section'>
       <header className='section__header'>
         <h2>
         Moje
@@ -54,10 +54,10 @@ const IndexPage = () => (
 
       <PreviewGrid />
 
-      <Button className='projects-section__button' to='/projects'> Więcej projektów </Button>
+      <Button className='projects-section__button' to='/projekty'> Więcej projektów </Button>
     </section>
 
-    <section id='contact' className='section contact-section'>
+    <section id='kontakt' className='section contact-section'>
       <header className='section__header'>
         <h2>
           <Akcent>Skontaktuj </Akcent>się ze mną
