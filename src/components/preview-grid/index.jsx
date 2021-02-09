@@ -16,15 +16,7 @@ export default function PreviewGrid() {
                 projects {
                 name
                 img {
-                    url
-                    formats {
-                    medium {
-                        url
-                    }
-                    small {
-                        url
-                    }
-                    }
+                   url
                 }
                 }
             }
@@ -40,15 +32,14 @@ export default function PreviewGrid() {
                 name: `${project.name}-${i + 1}`,
                 data: {
                     full: pic.url,
-                    medium: pic.formats.medium.url,
-                    small: pic.formats.small.url
+                    medium: pic.url,
+                    small: pic.url
                 }
             })
         })
     })
 
-
-
+   
     return (
         <div className={'projects-grid'}>
             {pics.slice(0, 12).map((pic, i) => <GridItem item={pic} index={'p' + i} key={i} />)}
