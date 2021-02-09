@@ -21,7 +21,7 @@
     "gatsby-plugin-sass": "^2.8.0",
     "gatsby-plugin-sharp": "^2.8.0",
     "gatsby-source-filesystem": "^2.5.0",
-    "gatsby-source-strapi": "^1.0.0-alpha.0",
+    "gatsby-source-strapi": "0.0.12",
     "gatsby-transformer-sharp": "^2.6.0",
     "lodash.throttle": "^4.1.1",
     "node-fetch": "^2.6.1",
@@ -43,7 +43,7 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "postinstall": "gatsby clean",
+    "postinstall":"gatsby clean",
     "build": "gatsby clean && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",

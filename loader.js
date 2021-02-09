@@ -2,14 +2,6 @@ const fetch = require('node-fetch');
 
 const { siteMetadata: { cmsUrl: CMS_URL } } = require('./gatsby-config')
 
-
-
-const query = `
-
-
-
-`
-
 exports.getDataFromCMS = async () => {
 
     const data = await Promise.all([
