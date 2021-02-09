@@ -38,7 +38,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
     `)
 }
 
-exports.createPages = async ({ actions, graphql }) => {
+exports.createPagesStatefully = async ({ actions, graphql }) => {
     const { createPage } = actions
 
     try {
