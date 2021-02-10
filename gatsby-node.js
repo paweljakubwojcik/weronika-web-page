@@ -133,7 +133,7 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
         const countPages = Math.ceil(allPics.length / countImagesPerPage)
 
         for (let currentPage = 1; currentPage <= countPages; currentPage++) {
-            const pathSuffix = (currentPage > 1 ? currentPage : "") /* To create paths "/", "/2", "/3", ... */
+            const pathSuffix = currentPage  /* To create paths "/", "/2", "/3", ... */
 
             /* Collect images needed for this page. */
             const startIndexInclusive = countImagesPerPage * (currentPage - 1)
@@ -142,20 +142,24 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
 
             /* Combine all data needed to construct this page. */
             const pageData = {
-                path: `/${basePath}/${pathSuffix}`,
-                component: paginatedPageTemplate,
-                context: {
-                    pageImages: pageImages,
-                    currentPage: currentPage,
-                    countPages: countPages
-                }
+                pageImages,
+                countPages,
+                currentPage,
             }
-
-            /* Create JSON (for infinite scroll) and page witgh first 20 items */
+            /* Create JSON (for infinite scroll) */
             createJSON(pageData)
-            if (currentPage === 1)
-                createPage(pageData)
         }
+
+
+        createPage({
+            path: `/${basePath}`,
+            component: paginatedPageTemplate,
+            context:{
+                countPages,
+                currentPage: 1
+            }
+        })
+
         console.log(`\nCreated ${countPages} pages of paginated content.`)
 
 
@@ -183,13 +187,13 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
 
 
 function createJSON(pageData) {
-    const pathSuffix = pageData.path.split('/').reverse()[0]
+    const pathSuffix = pageData.currentPage
     const dir = "public/paginationJson/"
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
     }
     const filePath = dir + "projects" + pathSuffix + ".json";
-    const dataToSave = JSON.stringify(pageData.context.pageImages);
+    const dataToSave = JSON.stringify(pageData.pageImages);
     fs.writeFile(filePath, dataToSave, function (err) {
         if (err) {
             return console.log(err);

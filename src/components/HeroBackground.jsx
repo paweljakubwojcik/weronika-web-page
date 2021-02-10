@@ -3,6 +3,9 @@ import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import { useIntersectionObserver } from '../util/hooks/useIntersectionObserver'
 
+
+//TODO: make it carousel
+
 const defaultParallax = -100
 
 export default function HeroImage() {

@@ -8,8 +8,6 @@ const GridItem = ({
     index
 }) => {
 
-    console.log(item)
-
     const { formats, name, url } = item
     const { medium, small, thumbnail } = formats
 
