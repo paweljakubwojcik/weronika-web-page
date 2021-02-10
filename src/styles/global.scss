@@ -93,6 +93,7 @@ li {
 
   @media (max-width: $contentWidth) {
     overflow-x: hidden;
+    overflow: hidden;
   }
 }
 

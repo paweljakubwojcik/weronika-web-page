@@ -28,7 +28,7 @@ export default function Experiences() {
     `)
 
     return (
-        <section className='exp-and-edu'>
+        <section className='exp-and-edu section'>
             <header className='section__header exp-and-edu__header'>
                 <h2> Moje <Akcent>doświadczenie i wykształcenie</Akcent></h2>
             </header>
@@ -40,7 +40,7 @@ export default function Experiences() {
                 <Exp className='exp-and-edu__svg exp-and-edu__svg--exp' />
             </section>
 
-            <section className='grid-section education'>
+            <section className='grid-section education '>
                 <Edu className='exp-and-edu__svg exp-and-edu__svg--edu' />
                 <div className="grid-section__column">
                     {data.educations.nodes.map(node => <Item data={node} />)}
