@@ -34,7 +34,7 @@ module.exports = {
       options: {
         apiURL: `https://cms-strapi-weronika-wojcik.herokuapp.com`,
         queryLimit: 100, // Default to 100
-        contentTypes: ['projects', '360-pics'],
+        contentTypes: ['projects', '360-pics', 'educations', 'entries'],
         //If using single types place them in this array.
         singleTypes: [`hero-image`, `hero-description`, 'hero-projects', 'personal-info'],
         // Possibility to login with a strapi user, when content types are not publically available (optional).

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+    viewBox="0 0 1185.727 887.353">
+    <defs>
+        <linearGradient id="a" x1="-11.741" y1="5.084" x2="-11.741" y2="4.933" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="gray" stop-opacity="0.251" />
+            <stop offset="0.535" stop-color="gray" stop-opacity="0.122" />
+            <stop offset="1" stop-color="gray" stop-opacity="0.102" />
+        </linearGradient>
+    </defs>
+    <g transform="matrix(0.927, 0.375, -0.375, 0.927, 180.048, -46.558)" >
+        <ellipse cx="56.449" cy="8.467" rx="56.449" ry="8.467" transform="translate(6.365 407.796) rotate(-63.611)"
+            fill="#e0e0e0" />
+        <ellipse cx="56.449" cy="5.753" rx="56.449" ry="5.753" transform="translate(684.14 712.341) rotate(-63.611)"
+            fill="#e0e0e0" />
+        <rect  transform="translate(333.942 504.147) rotate(39.547)" fill="#3d3d3d" />
+        <rect transform="translate(335.874 628.435) rotate(-166.769)" opacity="0.05" />
+        <rect  transform="translate(335.749 628.434) rotate(-166.769)" fill="#3d3d3d" />
+        <rect  transform="translate(12.695 367.124) rotate(-63.611)" fill="url(#a)" />
+        <rect  transform="translate(358.563 440.289) rotate(26.389)" opacity="0.05" />
+        <rect  transform="translate(361.048 441.623) rotate(26.389)" fill="#f55f44" />
+        <rect  transform="translate(368.539 445.747) rotate(26.389)" opacity="0.05" />
+        <rect  transform="translate(371.026 447.078) rotate(26.389)" fill="#f55f44" />
+        <path
+            d="M421.8,569.766l-38.6,57.9s12.868,59.513,297.565,57.9,307.216-57.9,307.216-57.9L934.9,550.465,772.445,439.481Z"
+            transform="translate(-124.586 -112.784)" fill="currentcolor" />
+        <path
+            d="M421.8,569.766l-38.6,57.9s12.868,59.513,297.565,57.9,307.216-57.9,307.216-57.9L934.9,550.465,772.445,439.481Z"
+            transform="translate(-125.187 -110.88)" opacity="0.15" />
+        <path d="M1094.848,321.354l-486,223.576L16.394,321.354,559.478,64,826.067,192.146l9.55,4.6Z"
+            transform="translate(1.151 -20.873)" fill="currentcolor" />
+        <path d="M1094.848,321.354l-486,223.576L16.394,321.354,369.938,153.818,559.478,64,826.067,192.146l9.55,4.6Z"
+            transform="translate(8.034 -18.9)" fill="#3d3d3d" opacity="0.15" />
+        <path d="M561.627,326.472l-9.651.579L541.184,143.67l9.956,4.6Z" transform="translate(285.504 8.139)"
+            fill="#d8d8d8" />
+        <path d="M428.234,398.874,383.2,672.313s323.3-104.55,604.782,0L946.159,382.79S568.17,336.144,428.234,398.874Z"
+            transform="translate(-124.586 -142.343)" fill="currentcolor" />
+        <ellipse cx="46.645" cy="32.169" rx="46.645" ry="32.169" transform="translate(798.435 307.421)"
+            fill="#f3f3f3" />
+    </g>
+</svg>

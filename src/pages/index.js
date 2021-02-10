@@ -14,38 +14,42 @@ import HeroImage from '../components/HeroImage'
 import BackgroundThing from "../components/background-thing/BackgroundThing"
 import HeroDescription from "../components/HeroDescription"
 import ContactSection from '../components/contact-section/ContactSection'
+import Experiences from "../components/experiences/Experiences"
 
 const IndexPage = () => (
   <Layout >
-    <SEO title='Interior Design'/>
-    <section id='home' className='section hero-section'>
+    <SEO title='Interior Design' />
+    <article id='home' className='section hero-section'>
       <HeroBackground />
 
       <header className='hero-section__header'>
-        <h2>Stwórzmy <br /> razem coś <br /><Akcent style={ { fontSize: "1.3em" } }> pięknego </Akcent></h2>
+        <h2>Stwórzmy <br /> razem coś <br /><Akcent style={{ fontSize: "1.3em" }}> pięknego </Akcent></h2>
         <Button className="hero-section__button" to='/projekty'> Portfolio </Button>
         <Button className="hero-section__button" to='/#kontakt'> Kontakt </Button>
       </header>
 
-    </section>
+    </article>
 
-    <section id='about' className='section about-section'>
-      <header className='about-section__header'>
-        <h2> <Akcent>Kim</Akcent> jestem ? </h2>
-      </header>
+    <article id='about' >
+      <section className='section about-section'>
+        <header className='about-section__header'>
+          <h2> <Akcent>Kim</Akcent> jestem ? </h2>
+        </header>
 
-      <HeroImage />
+        <HeroImage />
 
-      <div className="about-section__content">
-        <HeroDescription />
-      </div>
+        <div className="about-section__content">
+          <HeroDescription />
+        </div>
+      </section>
+      <Experiences />
 
-    </section>
+    </article>
 
-    <section id='projekty' className='section projects-section'>
+    <article id='projekty' className='section projects-section'>
       <header className='section__header'>
         <h2>
-        Moje
+          Moje
                 <Akcent> Projekty</Akcent>
         </h2>
       </header>
@@ -55,9 +59,9 @@ const IndexPage = () => (
       <PreviewGrid />
 
       <Button className='projects-section__button' to='/projekty'> Więcej projektów </Button>
-    </section>
+    </article>
 
-    <section id='kontakt' className='section contact-section'>
+    <article id='kontakt' className='section contact-section'>
       <header className='section__header'>
         <h2>
           <Akcent>Skontaktuj </Akcent>się ze mną
@@ -66,7 +70,7 @@ const IndexPage = () => (
 
       <ContactSection />
 
-    </section>
+    </article>
   </Layout >
 )
 
