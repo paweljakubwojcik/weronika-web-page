@@ -10,63 +10,124 @@ const { getDataFromCMS } = require('./loader')
 const path = require(`path`)
 const fs = require('fs');
 
+exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions
+    createTypes(`
+        interface Entry {
+            keywords: String
+            name: String
+            description: String
+        }
+        type Strapi360Pics implements Node & Entry {
+            img : IMG   
+        }
+        type StrapiProjects implements Node & Entry {
+            img : [IMG]
+        }
+        type IMG{
+            formats: FORMATS
+            url: String
+            width: Int
+            height: Int
+        }
+        type FORMATS {
+            large: format
+            medium: format
+            small: format
+            thumbnail: format
+        }
+        type format {
+            url: String!
+        }
+        `)
+}
 
 
-exports.createPages = async ({ actions }) => {
+exports.createPagesStatefully = async ({ actions, graphql }) => {
     const { createPage } = actions
+    const basePath = 'projekty'
 
     try {
 
-        const result = await getDataFromCMS()
+        const { data: result } = await graphql(`
+        
+            query DataQuery {
+                pics360:allStrapi360Pics {
+                    nodes {
+                        img {
+                            ...data
+                        }
+                        name
+                    }
+                }
+
+                projects:allStrapiProjects {
+                    nodes {
+                        img {
+                            ...data
+                        }
+                        name
+                    }
+                }
+            }
+
+            fragment data on IMG {
+                formats {
+                    medium {
+                        url
+                    }
+                    small {
+                        url
+                    }
+                    thumbnail {
+                        url
+                    }
+                }
+            }
+        `)
 
         const allPics = []
-        result.pic360.forEach((node, i) => {
+        result.pics360.nodes.forEach((node) => {
 
-            const { name, description, img, keywords } = node
-
+            const { img: { formats }, name } = node
             allPics.push({
-                name: `${name}`,
-                data: {
-                    keywords,
-                    description,
-                    full: img.url,
-                    medium: img.formats.medium?.url,
-                    small: img.formats.small?.url,
-                    thumbnail: img.formats.thumbnail?.url,
-                    panoramic: true
-                }
+                name,
+                project: name,
+                formats: {
+                    medium: formats.medium?.url,
+                    small: formats.small?.url,
+                    thumbnail: formats.thumbnail?.url,
+                },
+                panoramic: true
             })
-
-            allPics[i].previous = allPics[i - 1]?.name
-            if (allPics[i - 1]) allPics[i - 1].next = allPics[i].name
-
         })
 
         //adding every picture as separate node
-        result.projects.forEach((project) => {
-            const { name, img, description, keywords } = project
+        result.projects.nodes.forEach((project) => {
+            const { name, img } = project
 
             img.forEach((node, index) => {
-                const { url, formats, width, height } = node
-                const { medium, small, thumbnail } = formats
-
+                const { formats } = node
                 allPics.push({
-                    name: `${name}-${index + 1}`,
-                    data: {
-                        keywords,
-                        description,
-                        full: url,
-                        medium: medium?.url,
-                        small: small?.url,
-                        thumbnail: thumbnail?.url,
-                        width,
-                        height
-                    }
+                    name: `${name} ${index + 1}`,
+                    project: name,
+                    index,
+                    formats: {
+                        medium: formats.medium?.url,
+                        small: formats.small?.url,
+                        thumbnail: formats.thumbnail?.url,
+                    },
                 })
-                const i = allPics.length - 1
-                allPics[i].previous = allPics[i - 1]?.name
-                if (allPics[i - 1]) allPics[i - 1].next = allPics[i].name
             })
+        })
+
+
+        allPics.forEach((pic, index) => {
+            pic.url = `/${basePath}/${pic.name}`
+            if (allPics[index - 1]) {
+                allPics[index - 1].nextURL = pic.url
+                pic.prevURL = allPics[index - 1].url
+            }
         })
 
         console.log('Building paginated pages')
@@ -77,7 +138,7 @@ exports.createPages = async ({ actions }) => {
         const countPages = Math.ceil(allPics.length / countImagesPerPage)
 
         for (let currentPage = 1; currentPage <= countPages; currentPage++) {
-            const pathSuffix = (currentPage > 1 ? currentPage : "") /* To create paths "/", "/2", "/3", ... */
+            const pathSuffix = currentPage  /* To create paths "/", "/2", "/3", ... */
 
             /* Collect images needed for this page. */
             const startIndexInclusive = countImagesPerPage * (currentPage - 1)
@@ -86,21 +147,24 @@ exports.createPages = async ({ actions }) => {
 
             /* Combine all data needed to construct this page. */
             const pageData = {
-                path: `/projects/${pathSuffix}`,
-                component: paginatedPageTemplate,
-                context: {
-                    /* If you need to pass additional data, you can pass it inside this context object. */
-                    pageImages: pageImages,
-                    currentPage: currentPage,
-                    countPages: countPages
-                }
+                pageImages,
+                countPages,
+                currentPage,
             }
-
-            /* Create normal pages (for pagination) and corresponding JSON (for infinite scroll). */
+            /* Create JSON (for infinite scroll) */
             createJSON(pageData)
-            if (currentPage === 1)
-                createPage(pageData)
         }
+
+
+        createPage({
+            path: `/${basePath}`,
+            component: paginatedPageTemplate,
+            context: {
+                countPages,
+                currentPage: 1
+            }
+        })
+
         console.log(`\nCreated ${countPages} pages of paginated content.`)
 
 
@@ -108,17 +172,11 @@ exports.createPages = async ({ actions }) => {
         const singleItemTemplatePage = path.resolve(`src/templates/SingleProjectTemplate.jsx`)
 
         allPics.forEach(picData => {
-            const { name, next, previous } = picData
-            const basePath = 'project'
+            const { name } = picData
             const pageData = {
                 path: `/${basePath}/${name}`,
                 component: singleItemTemplatePage,
-                context: {
-                    url: `/${basePath}/${name}`,
-                    previousUrl: previous ? `/${basePath}/${previous}` : undefined,
-                    nextUrl: next ? `/${basePath}/${next}` : undefined,
-                    ...picData,
-                }
+                context: picData
             }
             createPage(pageData)
         })
@@ -134,13 +192,13 @@ exports.createPages = async ({ actions }) => {
 
 
 function createJSON(pageData) {
-    const pathSuffix = pageData.path.split('/').reverse()[0]
+    const pathSuffix = pageData.currentPage
     const dir = "public/paginationJson/"
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
     }
     const filePath = dir + "projects" + pathSuffix + ".json";
-    const dataToSave = JSON.stringify(pageData.context.pageImages);
+    const dataToSave = JSON.stringify(pageData.pageImages);
     fs.writeFile(filePath, dataToSave, function (err) {
         if (err) {
             return console.log(err);

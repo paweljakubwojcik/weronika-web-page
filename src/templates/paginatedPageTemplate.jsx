@@ -5,7 +5,7 @@ import { GlobalStateContext } from "../components/globalState.js"
 import Projects from "../components/projectsPage/Projects.jsx"
 
 class PaginatedPageTemplate extends React.Component {
-
+    
     render() {
         return (
             <Layout>

@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
 export default function HeroImage() {
-  const data = useStaticQuery(graphql`
+  /* const data = useStaticQuery(graphql`
      query {
          image:strapiHeroImage {
            image {
@@ -15,7 +15,9 @@ export default function HeroImage() {
            }
          }
        }
-   `)
+   `) */
+
+  const data = null
 
   if (!data?.image?.image.childImageSharp?.fluid) {
     return <div>Picture not found</div>

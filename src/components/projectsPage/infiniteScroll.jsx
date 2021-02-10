@@ -33,11 +33,9 @@ export class InfiniteScroll extends React.Component {
 
     checkWindowScroll = () => {
 
-        
         if (
             this.props.hasMore &&
-            this.sentinel?.getBoundingClientRect().top - window.innerHeight <
-            this.props.threshold
+            this.sentinel?.getBoundingClientRect().top - window.innerHeight < this.props.threshold
         ) {
             this.props.onLoadMore();
         }

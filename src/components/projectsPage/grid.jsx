@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 
 import GridItem from "./gridItem.jsx";
 
@@ -6,19 +6,23 @@ const Grid = (props) => {
     const g = props.globalState
     const currentPage = props.pageContext.currentPage
 
-    console.log('render')
-
     const items = []
     var i = 0, j = 0, numberOfItemsOnLatestPage = 0
-    const js = !g.isInitializing()
+
+    useEffect(() => {
+        // fetch items on initial load
+        if (items.length === 0)
+            g.loadMore()
+    }, [items])
+
     if (g.useInfiniteScroll && g["page" + currentPage]) {
-        for (var pageNum = currentPage; ; pageNum++) {
+        for (let pageNum = currentPage; ; pageNum++) {
             const key = "page" + pageNum
             if (g[key]) {
                 /* Add gridItems that we have received metadata for. */
                 numberOfItemsOnLatestPage = g[key].length
                 for (j = 0; j < numberOfItemsOnLatestPage; j++) {
-                    items.push(<GridItem js={js} item={g[key][j]} key={"gi" + (i++)} />)
+                    items.push(<GridItem item={g[key][j]} key={"gi" + (i++)} />)
                 }
             }
             else {
@@ -27,21 +31,13 @@ const Grid = (props) => {
             }
 
         }
-    } else {
-        /* This 'else' covers special cases when we don't have items in global state.
-         * - If a user has JS disabled (we won't be able to manipulate global state).
-         * - And the very first render on initial pageload. 
-         * In these cases we simply render the items of this page (corresponds to a path like "/", "/2", "/3",...)
-         */
-        props.pageContext.pageImages.forEach(item => items.push(<GridItem item={item} key={"gi" + (i++)} />))
     }
 
-    //console.log("Rendering " + i + " gridItems.")
+    console.log("Rendering " + i + " gridItems.")
 
-    const pics360 = items.filter(node => node.props.item.data.panoramic)
-    const projects = items.filter(node => !node.props.item.data.panoramic)
+    const pics360 = items.filter(node => node.props.item.panoramic)
+    const projects = items.filter(node => !node.props.item.panoramic)
 
-    console.log(items)
     return (
         <>
             {pics360 && <Section title={'Wizualizacje'}> {pics360}</Section>}

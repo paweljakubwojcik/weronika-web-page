@@ -6,14 +6,15 @@ import style from './projects-navigation.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight, faTimes, faInfo, faHome } from '@fortawesome/free-solid-svg-icons'
 
-export default function Navigation({ state, next, previous, info, visible }) {
+export default function Navigation({ state, next, prev, info, visible }) {
 
     const modal = state?.modal
+
 
     const handleKeyDown = (event) => {
         if (event.keyCode === 37) {
             /* Left arrow. */
-            navigate(previous, { state, replace: true })
+            navigate(prev, { state, replace: true })
         } else if (event.keyCode === 39) {
             /* Right arrow. */
             navigate(next, { state, replace: true })
@@ -29,10 +30,10 @@ export default function Navigation({ state, next, previous, info, visible }) {
 
 
     return (
-        <div className={style.container + ' ' + (visible ? "" : style.hidden)} onKeyDown={() => console.log('key')}>
-            {modal && previous &&
+        <div className={style.container + ' ' + (visible ? "" : style.hidden)}>
+            {modal && prev &&
                 <Link
-                    to={previous}
+                    to={prev}
                     state={state}
                     replace
                     className={style.button}
