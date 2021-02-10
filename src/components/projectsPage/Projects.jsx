@@ -17,7 +17,7 @@ export default function Projects({ globalState, pageContext }) {
                 cursor: pageContext.currentPage + 1
             })
         }
-    }, [])
+    }, [globalState, pageContext.currentPage])
 
     return (
         <>

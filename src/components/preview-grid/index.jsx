@@ -1,15 +1,11 @@
 import React from 'react'
-import { useStaticQuery, Link, graphql } from "gatsby"
-import Img from "gatsby-image"
-import styles from './preview-grid.module.scss'
+import { useStaticQuery, graphql } from "gatsby"
 
-import { ProgressiveImage } from 'react-progressive-image'
 import GridItem from '../projectsPage/gridItem'
 
 
 export default function PreviewGrid() {
 
-    //TODO: create new type in strapi named 'hero-page-images' of something
     const data = useStaticQuery(graphql`
         query MyQuery {
             projects:strapiHeroProjects {
@@ -56,7 +52,7 @@ export default function PreviewGrid() {
 
 }
 
-const ImageLink = ({ to, data, ...rest }) => {
+/* const ImageLink = ({ to, data, ...rest }) => {
     const { name } = data
     return (
         <Link to={to} >
@@ -65,4 +61,4 @@ const ImageLink = ({ to, data, ...rest }) => {
             </ProgressiveImage>
         </Link>
     )
-}
+} */

@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import Img from "gatsby-image"
 import ProgressiveImage from "react-progressive-image"
 
 const GridItem = ({

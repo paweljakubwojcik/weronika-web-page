@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Link, navigate } from 'gatsby'
 
 import style from './projects-navigation.module.scss'
@@ -11,7 +11,7 @@ export default function Navigation({ state, next, prev, info, visible }) {
     const modal = state?.modal
 
 
-    const handleKeyDown = (event) => {
+    const handleKeyDown = useCallback((event) => {
         if (event.keyCode === 37) {
             /* Left arrow. */
             navigate(prev, { state, replace: true })
@@ -19,14 +19,14 @@ export default function Navigation({ state, next, prev, info, visible }) {
             /* Right arrow. */
             navigate(next, { state, replace: true })
         }
-    }
+    }, [prev, next, state])
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown)
         return () => {
             window.removeEventListener('keydown', handleKeyDown)
         }
-    }, [])
+    }, [handleKeyDown])
 
 
     return (
@@ -78,6 +78,11 @@ const InfoButton = ({ info }) => {
         setOpen(prev => !prev)
     }
 
+    const closeInfo = useCallback((e) => {
+        if (e.target !== descriptionDOM && isOpen === true)
+            setOpen(false)
+    }, [descriptionDOM, isOpen])
+
     useEffect(() => {
         if (descriptionDOM) {
             const info = descriptionDOM.innerHTML
@@ -86,10 +91,13 @@ const InfoButton = ({ info }) => {
                 .replace(/\*{1}.+\*{1}/g, '<i>$&</i>')
                 .replace(/\*{1}/g, '')
             descriptionDOM.innerHTML = formatedInfo
+            window.addEventListener('click', closeInfo)
+        }
+        return () => {
+            window.removeEventListener('click', closeInfo)
         }
 
-    }, [descriptionDOM])
-
+    }, [descriptionDOM, closeInfo])
 
     return (
         <div className={style.infoContainer + ' ' + (isOpen ? style.open : style.closed)}>
@@ -97,8 +105,8 @@ const InfoButton = ({ info }) => {
                 <FontAwesomeIcon icon={faInfo} />
             </button>
 
-            <p className={style.info} onClick={handleClick} ref={setDescriptionDOM}>
+            <div className={style.info} ref={setDescriptionDOM}>
                 {info}
-            </p>
+            </div>
         </div >)
 }

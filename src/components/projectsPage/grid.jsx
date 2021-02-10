@@ -13,7 +13,7 @@ const Grid = (props) => {
         // fetch items on initial load
         if (items.length === 0)
             g.loadMore()
-    }, [items])
+    }, [items, g])
 
     if (g.useInfiniteScroll && g["page" + currentPage]) {
         for (let pageNum = currentPage; ; pageNum++) {

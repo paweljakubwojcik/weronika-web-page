@@ -66,7 +66,6 @@ const Switch = ({ active, setActive }) => {
                         key={name}>
                         <button className="switch__button"
                             name={name}
-                            role='button'
                             onClick={() => setActive(name)}>
                             <FontAwesomeIcon icon={icon} />
                         </button>

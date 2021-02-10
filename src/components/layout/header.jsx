@@ -1,7 +1,6 @@
 import './header.scss'
 
 import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React, { useEffect, useState } from "react"
 import Navbar from "./Navbar"
 

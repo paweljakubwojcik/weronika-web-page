@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 
 import {
     Scene,
@@ -31,16 +31,16 @@ export default function PanoramicView({ data, setNavVisibility }) {
     const camera = useMemo(() => typeof window !== `undefined` ? new PerspectiveCamera(fov, aspectRatio, near, far) : null, [])
     const renderer = useMemo(() => typeof window !== `undefined` ? new WebGLRenderer() : null, [])
 
-    function render() {
+    const render = useCallback(() => {
         requestAnimationFrame(() => renderer.render(scene, camera));
-    }
+    }, [scene, camera, renderer])
 
-    function resize() {
+    const resize = useCallback(() => {
         camera.aspect = window?.innerWidth / window?.innerHeight;
         renderer.setSize(window?.innerWidth, window?.innerHeight);
         camera.updateProjectionMatrix();
         render()
-    }
+    }, [camera, renderer, render])
 
     const [canvas, setCanvas] = useState(null)
     const [visible, setVisible] = useState(false)
@@ -50,7 +50,7 @@ export default function PanoramicView({ data, setNavVisibility }) {
         return () => {
             window.removeEventListener('resize', resize)
         }
-    }, [])
+    }, [resize])
 
 
     useEffect(() => {
@@ -76,7 +76,7 @@ export default function PanoramicView({ data, setNavVisibility }) {
             scene.add(skySphere)
             camera.updateProjectionMatrix();
         }
-    }, [canvas, camera, renderer])
+    }, [canvas, camera, renderer, data, render, scene])
 
     return (
         <div ref={setCanvas}
