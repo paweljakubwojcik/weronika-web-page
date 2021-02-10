@@ -11,7 +11,7 @@ const links = [
     },
     {
         name: 'O mnie',
-        url: '/#About',
+        url: '/#about',
         element: '#about'
     },
     {
