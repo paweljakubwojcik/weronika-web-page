@@ -23,15 +23,14 @@ export default function PreviewGrid() {
     const pics = []
 
     data.projects.projects.forEach(project => {
-        project.img.forEach((pic, i) => {
-            pics.push({
-                name: `${project.name} ${i + 1}`,
-                formats: {
-                    thumbnail: pic.url,
-                    medium: pic.url,
-                    small: pic.url
-                }
-            })
+
+        pics.push({
+            name: `${project.name}`,
+            formats: {
+                thumbnail: project.img[0].url,
+                medium: project.img[0].url,
+                small: project.img[0].url
+            }
         })
     })
 
