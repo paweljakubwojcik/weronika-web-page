@@ -8,3 +8,4 @@ Features:
 - [x] Gatsby SSR superpowers
 - [x] 360 degree view for some projects using Three.js
 - [x] fontAwesome icons
+- [x] SCSS 
