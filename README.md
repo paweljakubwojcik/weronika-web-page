@@ -3,6 +3,7 @@ Portfolio type website for a interior designer, utilizing pulling data from exte
 
 Features:
 - [x] Strapi CMS
+- [x] CI through webhooks and gatsby cloud
 - [x] Infinite scroll
 - [x] Email form
 - [x] Gatsby SSR superpowers
