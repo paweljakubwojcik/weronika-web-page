@@ -8,7 +8,7 @@ export default function Experiences() {
 
     const data = useStaticQuery(graphql`
         query EduAndExpQuery {
-            educations:allStrapiEducations {
+            educations:allStrapiEducations(sort: {fields: start, order: DESC}) {
                 nodes {
                     Contents
                     Tittle
@@ -16,7 +16,7 @@ export default function Experiences() {
                     end
                 }
             }
-            experiences:allStrapiEntries {
+            experiences:allStrapiEntries(sort: {fields: start, order: DESC}) {
                 nodes {
                     Tittle
                     contents
