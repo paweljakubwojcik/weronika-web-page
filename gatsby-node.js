@@ -6,7 +6,6 @@
 
 // You can delete this file if you're not using it
 
-const { getDataFromCMS } = require('./loader')
 const path = require(`path`)
 const fs = require('fs');
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
@@ -137,20 +136,18 @@ exports.createPagesStatefully = async ({ actions, graphql }) => {
         //adding every picture as separate node
         result.projects.nodes.forEach((project) => {
             const { name, img } = project
+            const { formats } = img[0]
 
-            img.forEach((node, index) => {
-                const { formats } = node
-                allPics.push({
-                    name: `${name} ${index + 1}`,
-                    project: name,
-                    index,
-                    formats: {
-                        medium: formats.medium?.url,
-                        small: formats.small?.url,
-                        thumbnail: formats.thumbnail?.url,
-                    },
-                })
+            allPics.push({
+                name: `${name}`,
+                project: name,
+                formats: {
+                    medium: formats.medium?.url,
+                    small: formats.small?.url,
+                    thumbnail: formats.thumbnail?.url,
+                },
             })
+
         })
 
 

@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .container {
     position: absolute;
     top: 0;
@@ -52,18 +54,19 @@ $button-margin: 0.3em;
 
 .button-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
     margin-bottom: 4em;
 }
 
-.info-container {
+.expandable-container {
     position: relative;
 }
 
-.info-container.closed {
-    .info {
+.expandable-container.closed {
+    .expandable-content {
         pointer-events: none;
         opacity: 0;
         clip-path: circle(1.5rem at calc(100% - calc(1.5rem + 0.3em)) calc(100% - calc(1.5rem + 0.3em)));
@@ -71,33 +74,41 @@ $button-margin: 0.3em;
     }
 }
 
-.info-container.open {
-    .info {
+.expandable-container.open {
+    .expandable-content {
         opacity: 1;
         clip-path: circle(100% at 50% 50%);
         transition: opacity 0.1s, clip-path 0.4s 0.1s;
     }
 }
 
-.info {
+.expandable-content {
     position: absolute;
     bottom: 0;
     right: 0;
     z-index: -1;
 
     padding: 2em;
+    padding-right: 3rem;
     margin: 0;
-    text-align: justify;
-    font-size: 1.4em;
-    white-space: pre-wrap;
 
     width: max-content;
-    max-width: 80vw;
+    max-width: 100vw;
     border-radius: 1em;
+
+    @include breakpoint-up(medium) {
+        max-width: 600px;
+    }
 
     background-color: var(--background-color);
     box-shadow: var(--shadow);
-    cursor: pointer;
 
     transition: opacity 0.4s, clip-path 0.4s;
+}
+
+.info {
+    text-align: justify;
+    font-size: 1.4em;
+    white-space: pre-wrap;
+    margin: 0;
 }

@@ -88,7 +88,6 @@ export default function PanoramicView({ data, setNavVisibility }) {
                 transition: 'opacity .5s',
             }}
         >
-
         </div>
     )
 }

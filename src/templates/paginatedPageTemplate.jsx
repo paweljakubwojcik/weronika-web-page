@@ -12,7 +12,7 @@ class PaginatedPageTemplate extends React.Component {
                 <GlobalStateContext.Consumer>
                     {globalState => (
                         <>
-                            <SEO title="Projects" />
+                            <SEO title="Projekty" />
                             <Projects globalState={globalState} pageContext={this.props.pageContext} />
                         </>
                     )}

@@ -1,8 +1,10 @@
 .blur-background {
-    position: absolute;
+    position: fixed;
+    left: 0;
+    top: 0;
     z-index: -1;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 
     opacity: 1;
 
@@ -32,9 +34,31 @@
         box-shadow: var(--shadow);
     }
 
-    img {
+    /* img {
         display: block;
         width: auto;
-       height: auto;
+        height: auto;
+    } */
+}
+
+.images-menu {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__item {
+        display: block;
+        width: 4rem;
+        flex-grow: 0;
+
+        margin: 1em;
+        box-shadow: var(--shadow);
+
+        cursor: pointer;
+        transition: transform 0.1s;
+        &:hover,
+        &:focus,
+        &--active {
+            transform: scale(1.1);
+        }
     }
 }
