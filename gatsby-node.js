@@ -9,6 +9,7 @@
 const path = require(`path`)
 const fs = require("fs")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
+const stringToURL = require("./src/util/normalizeStringToUrl")
 
 exports.onPreInit = () => {
   /* checkin heckin node version because I dont wanna spend another 2h debugging dependencies tree just because of node version mismach */
@@ -98,7 +99,7 @@ exports.createPages = async ({ actions, graphql }) => {
           }
         }
 
-        projects: allStrapiProjects {
+        projects: allStrapiProjects(sort: { order: DESC, fields: updatedAt }) {
           nodes {
             img {
               ...data
@@ -158,7 +159,7 @@ exports.createPages = async ({ actions, graphql }) => {
     })
 
     allPics.forEach((pic, index) => {
-      pic.url = `/${basePath}/${pic.name}`
+      pic.url = `/${basePath}/${stringToURL(pic.name)}`
       if (allPics[index - 1]) {
         allPics[index - 1].nextURL = pic.url
         pic.prevURL = allPics[index - 1].url
@@ -209,9 +210,9 @@ exports.createPages = async ({ actions, graphql }) => {
     )
 
     allPics.forEach(picData => {
-      const { name } = picData
+      const { name, url } = picData
       const pageData = {
-        path: `/${basePath}/${name}`,
+        path: url,
         component: singleItemTemplatePage,
         context: picData,
       }
